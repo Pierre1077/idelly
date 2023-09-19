@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -28,6 +30,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $firstname = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $phone = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Patient::class)]
+    private Collection $patients;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Meet::class)]
+    private Collection $meet;
+
+    public function __construct()
+    {
+        $this->patients = new ArrayCollection();
+        $this->meet = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -97,5 +120,101 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): static
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): static
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Patient>
+     */
+    public function getPatients(): Collection
+    {
+        return $this->patients;
+    }
+
+    public function addPatient(Patient $patient): static
+    {
+        if (!$this->patients->contains($patient)) {
+            $this->patients->add($patient);
+            $patient->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePatient(Patient $patient): static
+    {
+        if ($this->patients->removeElement($patient)) {
+            // set the owning side to null (unless already changed)
+            if ($patient->getUser() === $this) {
+                $patient->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Meet>
+     */
+    public function getMeet(): Collection
+    {
+        return $this->meet;
+    }
+
+    public function addMeet(Meet $meet): static
+    {
+        if (!$this->meet->contains($meet)) {
+            $this->meet->add($meet);
+            $meet->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeet(Meet $meet): static
+    {
+        if ($this->meet->removeElement($meet)) {
+            // set the owning side to null (unless already changed)
+            if ($meet->getUser() === $this) {
+                $meet->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
