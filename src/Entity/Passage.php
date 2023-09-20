@@ -26,6 +26,11 @@ class Passage
     #[ORM\ManyToOne(inversedBy: 'passages')]
     private ?Meet $meet = null;
 
+    public function __construct()
+    {
+        $this->etatPassage = false;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
