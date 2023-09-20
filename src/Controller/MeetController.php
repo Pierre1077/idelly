@@ -87,8 +87,6 @@ class MeetController extends AbstractController
                 }
             }
 
-
-
             return $this->redirectToRoute('app_meet');
         }
 
