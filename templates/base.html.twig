@@ -15,14 +15,14 @@
     <body>
         {% block body %}{% endblock %}
     </body>
-    {% if app.request.attributes.get('_controller') == 'App\Controller\SecurityController::login' or app.request.attributes.get('_controller') == 'App\Controller\RegistrationController::register' %}
-    <nav>
-        <a href="{{ path('app_more') }}">+</a>
-        <a href="{{ path('app_meet') }}">Meet</a>
-        <a href="{{ path('app_patients') }}">Patient</a>
-        <a href="{{ path('app_transmissions') }}">Transmission</a>
-        <a href="{{ path('app_messagerie') }}">Messagerie</a>
-        <a href="{{ path('app_menu') }}">Menu</a>
-    </nav>
+    {% if app.request.attributes.get('_route') not in ['app_register', 'app_login'] %}
+        <nav>
+            <a href="{{ path('app_more') }}">+</a>
+            <a href="{{ path('app_meet') }}">Meet</a>
+            <a href="{{ path('app_patients') }}">Patient</a>
+            <a href="{{ path('app_transmissions') }}">Transmission</a>
+            <a href="{{ path('app_messagerie') }}">Messagerie</a>
+            <a href="{{ path('app_menu') }}">Menu</a>
+        </nav>
     {% endif %}
 </html>
