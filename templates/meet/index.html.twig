@@ -4,61 +4,65 @@
 	<div class="container">
 		<h1>Liste des rendez-vous</h1>
 		{# <div class="dateToday">
-					<h2>{{ today | date('d/m/Y') }}</h2>
-				</div> #}
+							<h2>{{ today | date('d/m/Y') }}</h2>
+						</div> #}
 		{#<div class="selectDay">
-			<button class="left-button"><img src="../image/fleche_gauche.png" alt=""></button>
-			<input type="date" class="middle-date" value="today | date('d/m/Y')">
-			<button class="right-button"><img src="../image/fleche_droite.png" alt=""></button>
-		</div>#}
+					<button class="left-button"><img src="../image/fleche_gauche.png" alt=""></button>
+					<input type="date" class="middle-date" value="today | date('d/m/Y')">
+					<button class="right-button"><img src="../image/fleche_droite.png" alt=""></button>
+				</div>#}
 
-        {# affiche la date d'aujourdui #}
-        <div class="dateToday">
-			<a href="{{ path('app_meet', {'day': dayDateTime|date_modify("-1 day")|date("d-m-Y")})}}"> Précédent</a>
-			<a href="{{ path('app_meet', {'day': dayDateTime|date_modify("+1 day")|date("d-m-Y")})}}"> Suivant</a>
-            <h2>{{ dayDateTime|date('d/m/Y') }}</h2>
-        </div>
+		{# affiche la date d'aujourdui #}
+			<div class="dateToday"> <a href="{{ path('app_meet', {'day': dayDateTime|date_modify("-1 day")|date("d-m-Y")})}}">
+				Précédent</a>
+			<a href="{{ path('app_meet', {'day': dayDateTime|date_modify("+1 day")|date("d-m-Y")})}}">
+				Suivant</a>
+			<h2>{{ dayDateTime|date('d/m/Y') }}</h2>
+		</div>
+
 		<ul class="list-rdv">
 			{% for meet in meets %}
-				{% for passage in meet.passages %}
-					{% if passage.hour|date('H:i') < '12:00' %}
-						<h2>Matin</h2>
-						<div class="list-infoRDV">
-							<div>
-								{{ meet.patient.name }}
-								{{ meet.patient.firstName }}
-								<div>{{ meet.typeSoin }}</div>
-								<div style="color: red;">{{ meet.infoComplementaire }}</div>
+				{% if meet.dateDebut  <= dayDateTime and dayDateTime <= meet.dateFin%}
+					{% for passage in meet.passages %}
+						{% if passage.hour|date('H:i') < '12:00' %}
+							<h2>Matin</h2>
+							<div class="list-infoRDV">
+								<div>
+									{{ meet.patient.name }}
+									{{ meet.patient.firstName }}
+									<div>{{ meet.typeSoin }}</div>
+									<div style="color: red;">{{ meet.infoComplementaire }}</div>
+								</div>
+								<div>{{ passage.hour|date('H:i') }}</div>
+								<div>
+									{% if passage.etatPassage == 1 %}FAIT
+									{% endif %}
+									{% if passage.etatPassage == 0 %}NON FAIT
+									{% endif %}
+								</div>
 							</div>
-							<div>{{ passage.hour|date('H:i') }}</div>
-							<div>
-								{% if passage.etatPassage == 1 %}FAIT
-								{% endif %}
-								{% if passage.etatPassage == 0 %}NON FAIT
-								{% endif %}
-							</div>
-						</div>
 
-					{% endif %}
-					{% if passage.hour|date('H:i') > '12:00' %}
-						<h2>Après-midi</h2>
-						<div class="list-infoRDV">
-							<div>
-								{{ meet.patient.name }}
-								{{ meet.patient.firstName }}
-								<div>{{ meet.typeSoin }}</div>
-								<div style="color: red;">{{ meet.infoComplementaire }}</div>
+						{% endif %}
+						{% if passage.hour|date('H:i') > '12:00' %}
+							<h2>Après-midi</h2>
+							<div class="list-infoRDV">
+								<div>
+									{{ meet.patient.name }}
+									{{ meet.patient.firstName }}
+									<div>{{ meet.typeSoin }}</div>
+									<div style="color: red;">{{ meet.infoComplementaire }}</div>
+								</div>
+								<div>{{ passage.hour|date('H:i') }}</div>
+								<div>
+									{% if passage.etatPassage == 1 %}FAIT
+									{% endif %}
+									{% if passage.etatPassage == 0 %}NON FAIT
+									{% endif %}
+								</div>
 							</div>
-							<div>{{ passage.hour|date('H:i') }}</div>
-							<div>
-								{% if passage.etatPassage == 1 %}FAIT
-								{% endif %}
-								{% if passage.etatPassage == 0 %}NON FAIT
-								{% endif %}
-							</div>
-						</div>
-					{% endif %}
-				{% endfor %}
+						{% endif %}
+					{% endfor %}
+				{% endif %}
 			{% endfor %}
 		</ul>
 	</div>
@@ -82,11 +86,11 @@
 			margin: 0 auto;
 		}
 
-        .selectDay input {
-            font-size: 2em;
-            width: fit-content;
-            margin: 0 10px;
-        }
+		.selectDay input {
+			font-size: 2em;
+			width: fit-content;
+			margin: 0 10px;
+		}
 
 		.left-button,
 		.right-button {
