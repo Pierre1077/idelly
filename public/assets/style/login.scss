@@ -1,0 +1,84 @@
+#login {
+  background: rgb(230,0,126);
+  background: linear-gradient(180deg, rgba(230,0,126,1) 0%, rgba(102,36,131,1) 100%);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+
+  #form__login {
+    height: 90%;
+  }
+
+  form[name^="registration_form"] {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    align-items: center;
+
+    div {
+      width: 100%;
+    }
+  }
+  .form__wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 22px;
+
+    .form__inputs {
+
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 22px;
+      justify-content: center;
+      align-items: center;
+
+      input {
+        width: 90%;
+        border: none;
+        height: 40px;
+        border-radius: 16px;
+        padding-left: 15px;
+        &:focus {
+          outline: none;
+        }
+      }
+
+    }
+
+    button {
+      border: solid 2px #ffffff;
+      border-radius: 16px;
+      width: 50%;
+      height: 40px;
+      font-size: 22px;
+      color: #ffffff;
+      background: none;
+      cursor: pointer;
+    }
+
+
+    .form__navigation{
+
+      display: flex;
+      gap: 16px;
+      a {
+        color: #151519;
+        text-decoration: none;
+        font-size: 22px;
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 8px 32px;
+
+      }
+    }
+  }
+
+}
