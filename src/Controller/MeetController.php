@@ -26,10 +26,13 @@ class MeetController extends AbstractController
     #[Route('/meet', name: 'app_meet')]
     public function index(): Response
     {
-        $meets = $this->meetRepository->findAll(); // Ceci renvoi tout les rdv de la base de donnée (Il faut afficher uniquement celle don't les dates sont d'actualité) donc à modifié
+        // La date d'aujourd'hui 
+        $today = new \DateTime('now');
+        $meets = $this->meetRepository->findBy(['user' => $this->getUser()]); // Ceci renvoi tout les rdv de la base de donnée (Il faut afficher uniquement celle don't les dates sont d'actualité) donc à modifié
 
         return $this->render('meet/index.html.twig', [
             "meets" => $meets,
+            "today" => $today
         ]);
     }
 

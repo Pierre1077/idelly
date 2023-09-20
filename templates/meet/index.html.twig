@@ -3,6 +3,10 @@
 {% block body %}
 	<div class="container">
 		<h1>Liste des rendez-vous</h1>
+        {# affiche la date d'aujourdui #}
+        <div class="dateToday">
+            <h2>{{ today | date('d/m/Y') }}</h2>
+        </div>
 		<ul class="list-rdv">
 			{% for meet in meets %}
 				{% for passage in meet.passages %}
