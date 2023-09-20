@@ -45,4 +45,16 @@ class PatientRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function searchPatients($query)
+    {
+        // Écrivez la logique de recherche ici en utilisant Doctrine QueryBuilder
+        $qb = $this->createQueryBuilder('p')
+            ->where('p.name LIKE :query')
+            ->orWhere('p.firstname LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->getQuery();
+
+        return $qb->getResult();
+    }
 }

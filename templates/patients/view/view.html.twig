@@ -1,0 +1,6 @@
+{{ patient.name }}
+<form method="POST" action="{{ path('app_patients_delete', {'id': patient.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');">
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+    <a href="{{ path('app_patients') }}">Retour à la liste des patients</a>
+
+</form>

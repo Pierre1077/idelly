@@ -3,18 +3,50 @@
 {% block title %}Hello PatientsController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Patients</h1>
+    <form id="search-form">
+        <input type="text" id="search-input" placeholder="Rechercher un patient">
+    </form>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Pierre/Desktop/idelly/src/Controller/PatientsController.php'|file_link(0) }}">src/Controller/PatientsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Pierre/Desktop/idelly/templates/patients/index.html.twig'|file_link(0) }}">templates/patients/index.html.twig</a></code></li>
-    </ul>
+    <ul id="results-list"></ul>
+
+    <script>
+        document.getElementById('search-input').addEventListener('input', function () {
+            const query = this.value;
+            const list__patients = document.getElementById('list__patients');
+
+            if(query !== '')
+            {
+                fetch(`/patients/search?query=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const resultsList = document.getElementById('results-list');
+                        resultsList.innerHTML = '';
+
+                        list__patients.style.display = 'none';
+
+                        data.patients.forEach(patient => {
+                            const listItem = document.createElement('li');
+                            listItem.innerHTML = `<div>${patient.name} ${patient.firstname} <a href="/patients/view/${patient.id}">Voir</a></div>`;
+                            resultsList.appendChild(listItem);
+                        });
+                    });
+            }
+        });
+    </script>
+
+    <a href="{{ path('app_patients_add') }}">Add patients</a>
+
+    <div id="list__patients">
+        {% for p in patients %}
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <p>{{ p.name }}</p>
+                <p>{{ p.firstname }}</p>
+                <a href="{{ path('app_patients_view', {'id': p.id}) }}">Voir</a>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
