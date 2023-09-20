@@ -1,0 +1,62 @@
+<div>
+    {{ form_start(form) }}
+    <div>
+        <div>
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+        </div>
+        <div>
+            {{ form_label(form.firstname) }}
+            {{ form_widget(form.firstname) }}
+        </div>
+        <div>
+            {{ form_label(form.adress) }}
+            {{ form_widget(form.adress) }}
+        </div>
+        <div>
+            {{ form_label(form.phone) }}
+            {{ form_widget(form.phone) }}
+        </div><div>
+        {{ form_label(form.birthday) }}
+        {{ form_widget(form.birthday) }}
+    </div>
+        <div>
+            {{ form_label(form.numSecu) }}
+            {{ form_widget(form.numSecu) }}
+        </div>
+        <div>
+            {{ form_label(form.genre) }}
+            {{ form_widget(form.genre) }}
+        </div>
+        <div>
+            {{ form_label(form.infoSupAdress) }}
+            {{ form_widget(form.infoSupAdress) }}
+        </div>
+        <div>
+            {{ form_label(form.fullNameMedecinTraitant) }}
+            {{ form_widget(form.fullNameMedecinTraitant) }}
+        </div>
+        <div>
+            {{ form_label(form.PhoneMedecinTraitant) }}
+            {{ form_widget(form.PhoneMedecinTraitant) }}
+        </div>
+        <div>
+            {{ form_label(form.PharmacieName) }}
+            {{ form_widget(form.PharmacieName) }}
+        </div>
+        <div>
+            {{ form_label(form.PhonePharmacie) }}
+            {{ form_widget(form.PhonePharmacie) }}
+        </div>
+        <div>
+            {{ form_label(form.fullNameUrgentContact) }}
+            {{ form_widget(form.fullNameUrgentContact) }}
+        </div>
+        <div>
+            {{ form_label(form.phoneUrgentContact) }}
+            {{ form_widget(form.phoneUrgentContact) }}
+        </div>
+    </div>
+    <button type="submit">Enregistrer</button>
+    {{ form_end(form) }}
+</div>

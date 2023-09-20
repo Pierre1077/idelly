@@ -9,12 +9,22 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Patients</h1>
+    <a href="{{ path('app_patients_add') }}">Add patients</a>
+{#    {{ form_start(form) }}#}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Pierre/Desktop/idelly/src/Controller/PatientsController.php'|file_link(0) }}">src/Controller/PatientsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Pierre/Desktop/idelly/templates/patients/index.html.twig'|file_link(0) }}">templates/patients/index.html.twig</a></code></li>
-    </ul>
+{#    <button type="submit">Enregistrer</button>#}
+{#    {{ form_end(form) }}#}
+
+
+    {% for p in patients %}
+
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <p>{{ p.name }}</p>
+            <p>{{ p.firstname }}</p>
+            <a href="">Voir</a>
+        </div>
+
+    {% endfor %}
 </div>
 {% endblock %}
