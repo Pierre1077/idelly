@@ -108,7 +108,7 @@ class MeetController extends AbstractController
             }
 
             $currentDate = (new \DateTime())->format('d-m-Y');
-            return $this->redirectToRoute('app_meet', ['date' => $currentDate]);
+            return $this->redirectToRoute('app_meet', ['day' => $currentDate]);
         }
 
         return $this->render('meet/newMeet.html.twig', [
