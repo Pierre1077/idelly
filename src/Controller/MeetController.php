@@ -38,6 +38,24 @@ class MeetController extends AbstractController
         ]);
     }
 
+    #[Route('/meet/{day}/{passage}/valided', name: 'app_passage_validated')]
+    public function validatedPassage(string $day, Passage $passage): Response
+    {
+        $passage->setEtatPassage(true);
+        $this->entityManager->persist($passage);
+        $this->entityManager->flush();
+        return $this->redirectToRoute('app_meet', ['day' => $day]);
+    }
+
+    #[Route('/meet/{day}/{passage}/denied', name: 'app_passage_denied')]
+    public function deniedPassage(string $day, Passage $passage): Response
+    {
+        $passage->setEtatPassage(false);
+        $this->entityManager->persist($passage);
+        $this->entityManager->flush();
+        return $this->redirectToRoute('app_meet', ['day' => $day]);
+    }
+
     #[Route('/meet/show/{id}', name: 'app_meet_show')]
     public function show(Meet $meet): Response
     {
@@ -63,18 +81,18 @@ class MeetController extends AbstractController
             $this->entityManager->flush();
 
             $i = 0;
-            switch ($meet->getTypePassage()){
-                case 'Tous les jours' :
+            switch ($meet->getTypePassage()) {
+                case 'Tous les jours':
                     $i = 1;
                     break;
-                case 'Tous les 3 jours' :
+                case 'Tous les 3 jours':
                     $i = 3;
                     break;
             }
 
-            if ($i != 0 and $meet->getDateDebut() != null){
+            if ($i != 0 and $meet->getDateDebut() != null) {
                 $date = $meet->getDateDebut();
-                while ($date <= $meet->getDateFin()){
+                while ($date <= $meet->getDateFin()) {
                     $passage = new Passage();
                     $passage->setMeet($meet);
                     $passage->setDatePassage($date);
@@ -85,16 +103,16 @@ class MeetController extends AbstractController
                     $this->entityManager->persist($passage);
                     $this->entityManager->flush();
 
-                    date_modify($date,'+'.$i.' day');
+                    date_modify($date, '+' . $i . ' day');
                 }
             }
 
-            return $this->redirectToRoute('app_meet');
+            $currentDate = (new \DateTime())->format('d-m-Y');
+            return $this->redirectToRoute('app_meet', ['date' => $currentDate]);
         }
 
         return $this->render('meet/newMeet.html.twig', [
-            'form'=>$form,
+            'form' => $form,
         ]);
     }
-
 }

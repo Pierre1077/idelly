@@ -4,13 +4,13 @@
 	<div class="container">
 		<h1>Liste des rendez-vous</h1>
 		{# <div class="dateToday">
-							<h2>{{ today | date('d/m/Y') }}</h2>
-						</div> #}
+																											<h2>{{ today | date('d/m/Y') }}</h2>
+																										</div> #}
 		{#<div class="selectDay">
-					<button class="left-button"><img src="../image/fleche_gauche.png" alt=""></button>
-					<input type="date" class="middle-date" value="today | date('d/m/Y')">
-					<button class="right-button"><img src="../image/fleche_droite.png" alt=""></button>
-				</div>#}
+																									<button class="left-button"><img src="../image/fleche_gauche.png" alt=""></button>
+																									<input type="date" class="middle-date" value="today | date('d/m/Y')">
+																									<button class="right-button"><img src="../image/fleche_droite.png" alt=""></button>
+																								</div>#}
 
 		{# affiche la date d'aujourdui #}
 			<div class="dateToday"> <a href="{{ path('app_meet', {'day': dayDateTime|date_modify("-1 day")|date("d-m-Y")})}}">
@@ -35,9 +35,15 @@
 								</div>
 								<div>{{ passage.hour|date('H:i') }}</div>
 								<div>
-									{% if passage.etatPassage == 1 %}FAIT
+									{% if passage.etatPassage == 1 %}
+										<a href="{{ path('app_passage_denied', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
+											Annuler
+										</a>
 									{% endif %}
-									{% if passage.etatPassage == 0 %}NON FAIT
+									{% if passage.etatPassage == 0 %}
+										<a href="{{ path('app_passage_validated', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
+											Valider
+										</a>
 									{% endif %}
 								</div>
 							</div>
@@ -54,9 +60,15 @@
 								</div>
 								<div>{{ passage.hour|date('H:i') }}</div>
 								<div>
-									{% if passage.etatPassage == 1 %}FAIT
+									{% if passage.etatPassage == 1 %}
+										<a href="{{ path('app_passage_denied', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
+											Annuler
+										</a>
 									{% endif %}
-									{% if passage.etatPassage == 0 %}NON FAIT
+									{% if passage.etatPassage == 0 %}
+										<a href="{{ path('app_passage_validated', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
+											Valider
+										</a>
 									{% endif %}
 								</div>
 							</div>
