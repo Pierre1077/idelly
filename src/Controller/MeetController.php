@@ -6,6 +6,8 @@ use App\Entity\Meet;
 use App\Entity\Passage;
 use App\Form\Meet\NewMeetFormType;
 use App\Repository\MeetRepository;
+use DateTime;
+use Doctrine\DBAL\Types\DateType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,16 +25,16 @@ class MeetController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/meet', name: 'app_meet')]
-    public function index(): Response
+    #[Route('/meet/{day}', name: 'app_meet')]
+    public function index(string $day): Response
     {
-        // La date d'aujourd'hui 
-        $today = new \DateTime('now');
-        $meets = $this->meetRepository->findBy(['user' => $this->getUser()]); // Ceci renvoi tout les rdv de la base de donnée (Il faut afficher uniquement celle don't les dates sont d'actualité) donc à modifié
+        // La date d'aujourd'hui
+        $dayDateTime = DateTime::createFromFormat('d-m-Y', $day);
 
+        $meets = $this->meetRepository->findBy(['user' => $this->getUser()]); // Ceci renvoi tout les rdv de la base de donnée (Il faut afficher uniquement celle don't les dates sont d'actualité) donc à modifié
         return $this->render('meet/index.html.twig', [
             "meets" => $meets,
-            "today" => $today
+            "dayDateTime" => $dayDateTime,
         ]);
     }
 

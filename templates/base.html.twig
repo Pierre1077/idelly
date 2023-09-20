@@ -18,7 +18,7 @@
     {% if app.request.attributes.get('_route') not in ['app_register', 'app_login'] %}
         <nav>
             <a href="{{ path('app_more') }}">+</a>
-            <a href="{{ path('app_meet') }}">Meet</a>
+            <a href="{{ path('app_meet', {'day': 'now'|date('d-m-Y')})}}">Meet</a>
             <a href="{{ path('app_patients') }}">Patient</a>
             <a href="{{ path('app_transmissions') }}">Transmission</a>
             <a href="{{ path('app_messagerie') }}">Messagerie</a>
