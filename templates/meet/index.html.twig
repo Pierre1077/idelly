@@ -1,7 +1,75 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Meet Index{% endblock %}
-
 {% block body %}
-    Index MEET
+	<div class="container">
+		<h1>Liste des rendez-vous</h1>
+        {# affiche la date d'aujourdui #}
+        <div class="dateToday">
+            <h2>{{ today | date('d/m/Y') }}</h2>
+        </div>
+		<ul class="list-rdv">
+			{% for meet in meets %}
+				{% for passage in meet.passages %}
+					{% if passage.hour|date('H:i') < '12:00' %}
+						<h2>Matin</h2>
+						<div class="list-infoRDV">
+							<div>
+								{{ meet.patient.name }}
+								{{ meet.patient.firstName }}
+								<div>{{ meet.typeSoin }}</div>
+								<div style="color: red;">{{ meet.infoComplementaire }}</div>
+							</div>
+							<div>{{ passage.hour|date('H:i') }}</div>
+							<div>
+								{% if passage.etatPassage == 1 %}FAIT
+								{% endif %}
+                                {% if passage.etatPassage == 0 %}NON FAIT
+                                {% endif %}
+							</div>
+						</div>
+
+					{% endif %}
+					{% if passage.hour|date('H:i') > '12:00' %}
+                        <h2>Après-midi</h2>
+                        <div class="list-infoRDV">
+                            <div>
+                                {{ meet.patient.name }}
+                                {{ meet.patient.firstName }}
+                                <div>{{ meet.typeSoin }}</div>
+                                <div style="color: red;">{{ meet.infoComplementaire }}</div>
+                            </div>
+                            <div>{{ passage.hour|date('H:i') }}</div>
+                            <div>
+                                {% if passage.etatPassage == 1 %}FAIT
+                                {% endif %}
+                                {% if passage.etatPassage == 0 %}NON FAIT
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+				{% endfor %}
+			{% endfor %}
+		</ul>
+	</div>
+
+
+	<style>
+		.container {
+			;
+			/* Taille du text */
+			font-size: 2em;
+		}
+		.list-rdv {
+			margin: 0;
+			padding: 0;
+		}
+		.list-infoRDV {
+			display: grid;
+			grid-template-columns: 50% 25% 25%;
+			border: 1px solid black;
+			border-bottom: 3px solid;
+			position: relative;
+			left: 0;
+		}
+	</style>
 {% endblock %}
