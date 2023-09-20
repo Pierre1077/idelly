@@ -17,8 +17,6 @@
             const query = this.value;
             const list__patients = document.getElementById('list__patients');
 
-            if(query !== '')
-            {
                 fetch(`/patients/search?query=${query}`)
                     .then(response => response.json())
                     .then(data => {
@@ -32,8 +30,7 @@
                             listItem.innerHTML = `<div>${patient.name} ${patient.firstname} <a href="/patients/view/${patient.id}">Voir</a></div>`;
                             resultsList.appendChild(listItem);
                         });
-                    });
-            }
+                });
         });
     </script>
 

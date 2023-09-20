@@ -14,6 +14,7 @@
     <body>
         {% block body %}{% endblock %}
     </body>
+    {% if app.request.attributes.get('_controller') == 'App\Controller\SecurityController::login' or app.request.attributes.get('_controller') == 'App\Controller\RegistrationController::register' %}
     <nav>
         <a href="{{ path('app_more') }}">+</a>
         <a href="{{ path('app_meet') }}">Meet</a>
@@ -22,4 +23,5 @@
         <a href="{{ path('app_messagerie') }}">Messagerie</a>
         <a href="{{ path('app_menu') }}">Menu</a>
     </nav>
+    {% endif %}
 </html>
