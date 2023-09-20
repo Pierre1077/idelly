@@ -1,7 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Meet Index{% endblock %}
-
 {% block body %}
-    Index MEET
+	<div class="container">
+		<h1>Liste des rendez-vous</h1>
+		<ul class="list-rdv">
+			{% for meet in meets %}
+				<div class="list-infoRDV">
+					<div>
+                        {{meet.patient.name}}
+						{{meet.patient.firstName}}
+						<div>{{meet.typeSoin}}</div>
+                        <div style="color: red;">{{meet.infoComplementaire}}</div>
+					</div>
+					{% for passage in meet.passages %}
+							<div>{{passage.hour|date('H:i')}}</div>
+							<div>
+								{% if passage.etatPassage == 1 %}FAIT
+								{% endif %}
+							</div>
+					{% endfor %}
+				</div>
+			{% endfor %}
+		</ul>
+	</div>
+
+	<style>
+		.container {
+			/* Taille du text */
+			font-size: 2em;
+		}
+		.list-infoRDV {
+			display: grid;
+			grid-template-columns: 50% 25% 25%;
+            border: 1px solid black;
+            border-bottom: 3px solid ;
+		}
+	</style>
 {% endblock %}
