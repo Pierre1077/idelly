@@ -7,22 +7,25 @@
             
     <div class="container">
     <h2 class="white">{{ meet.patient.firstname }} {{ meet.patient.name }}</h2>
-    <h3>SOINS</h3>
+    <h3>Soins</h3>
     <p class="gray-margin">{{ meet.typeSoin }}</p>
-    <h3>FREQUENCE</h3>
-    <ul>DEBUT DES PASSAGES :</ul>
+    <h3>Frequence</h3>
+    <ul>Début de passage :</ul>
     <p class="gray-margin">
         <span class="date">{{ meet.dateDebut|date('d/m/Y') }}</span>
     </p>
-
+    <ul>Fin de passage :</ul>
+    <p class="gray-margin">
+        <span class="date">{{ meet.dateFin|date('d/m/Y') }}</span>
+    </p>
     <div class="flex-container">
-        <ul>HEURE DE PASSAGE :</ul>
+        <ul>Heure de passage :</ul>
         <div class="checkbox-wrapper">
             <p class="time">{{ meet.passages[0].hour|date('H:i') }}</p>
         </div>
     </div>
 
-    <h3>TYPE PASSAGE</h3>
+    <h3>Type de passage :</h3>
     <p class="gray-margin">{{ meet.typePassage }}</p>
     </div>
 
@@ -78,6 +81,7 @@
                 }
                 .container {
                 height: 100vh;
+                 padding-bottom: 10px;
                 }
 
                 </style>
