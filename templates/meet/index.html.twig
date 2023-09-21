@@ -1,107 +1,126 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="container">
-		<h1>Liste des rendez-vous</h1>
-		{# <div class="dateToday">
-																											<h2>{{ today | date('d/m/Y') }}</h2>
-																										</div> #}
-		{#<div class="selectDay">
-																									<button class="left-button"><img src="../image/fleche_gauche.png" alt=""></button>
-																									<input type="date" class="middle-date" value="today | date('d/m/Y')">
-																									<button class="right-button"><img src="../image/fleche_droite.png" alt=""></button>
-																								</div>#}
-
-		{# affiche la date d'aujourdui #}
-			<div class="dateToday"> <a href="{{ path('app_meet', {'day': dayDateTime|date_modify("-1 day")|date("d-m-Y")})}}">
-				Précédent</a>
-			<a href="{{ path('app_meet', {'day': dayDateTime|date_modify("+1 day")|date("d-m-Y")})}}">
-				Suivant</a>
-			<h2>{{ dayDateTime|date('d/m/Y') }}</h2>
+	<div
+		class="container">
+		{# Selecteur de date #}
+		<div class="selectDay">
+			<a class="left-button" href="{{ path('app_meet', {'day': dayDateTime|date_modify("-1 day")|date("d-m-Y")})}}">
+				<img src="../image/fleche_gauche.png" alt="">
+			</a>
+			<h2 class="dateSelected">{{ dayDateTime|date('d/m/Y') }}</h2>
+			<a class="right-button" href="{{ path('app_meet', {'day': dayDateTime|date_modify("+1 day")|date("d-m-Y")})}}">
+				<img src="../image/fleche_droite.png" alt="">
+			</a>
 		</div>
 
-		<ul class="list-rdv">
-			{% for meet in meets %}
-				{% if meet.dateDebut  <= dayDateTime and dayDateTime <= meet.dateFin%}
-					{% for passage in meet.passages %}
-						{% if passage.hour|date('H:i') < '12:00' %}
-							<h2>Matin</h2>
-							<div class="list-infoRDV">
-								<div>
-									{{ meet.patient.name }}
-									{{ meet.patient.firstName }}
-									<div>{{ meet.typeSoin }}</div>
-									<div style="color: red;">{{ meet.infoComplementaire }}</div>
-								</div>
-								<div>{{ passage.hour|date('H:i') }}</div>
-								<div>
-									{% if passage.etatPassage == 1 %}
-										<a href="{{ path('app_passage_denied', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
-											Annuler
-										</a>
-									{% endif %}
-									{% if passage.etatPassage == 0 %}
-										<a href="{{ path('app_passage_validated', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
-											Valider
-										</a>
-									{% endif %}
-								</div>
-							</div>
+		{% set morningDisplayed = false %}
+		{% set afternoonDisplayed = false %}
+		{% for meet in meets %}
+			{% if meet.dateDebut <= dayDateTime and dayDateTime <= meet.dateFin %}
+				{% for passage in meet.passages %}
 
-						{% endif %}
-						{% if passage.hour|date('H:i') > '12:00' %}
-							<h2>Après-midi</h2>
-							<div class="list-infoRDV">
-								<div>
-									{{ meet.patient.name }}
-									{{ meet.patient.firstName }}
-									<div>{{ meet.typeSoin }}</div>
-									<div style="color: red;">{{ meet.infoComplementaire }}</div>
+					{# Le matin #}
+					{% if passage.hour|date('H:i') < '12:00' %}
+						<div class="am_pm">
+							{% if not morningDisplayed %}
+								<h2>Matin</h2>
+								{% set morningDisplayed = true %}
+							{% endif %}
+							<ul class="list-rdv {% if passage.etatPassage == 1 %}opacity-change{% endif %}">
+								<div class="list-infoRDV">
+									<div>
+										<div class="nomPatient">{{ meet.patient.name }}
+											{{ meet.patient.firstName }}</div>
+										<div>{{ meet.typeSoin }}</div>
+										<div style="color: red;">{{ meet.infoComplementaire }}</div>
+									</div>
+									<div class="heure">{{ passage.hour|date('H:i') }}</div>
+									<div>
+										{% if passage.etatPassage == 1 %}
+											<a href="{{ path('app_passage_denied', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
+												<img class="buttonCancel" src="../image/croix_blanc.png" alt="">
+											</a>
+										{% endif %}
+										{% if passage.etatPassage == 0 %}
+											<a href="{{ path('app_passage_validated', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
+												<img class="buttonValid" src="../image/check_blanc.png" alt="">
+											</a>
+										{% endif %}
+									</div>
 								</div>
-								<div>{{ passage.hour|date('H:i') }}</div>
-								<div>
-									{% if passage.etatPassage == 1 %}
-										<a href="{{ path('app_passage_denied', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
-											Annuler
-										</a>
-									{% endif %}
-									{% if passage.etatPassage == 0 %}
-										<a href="{{ path('app_passage_validated', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
-											Valider
-										</a>
-									{% endif %}
+							</ul>
+						</div>
+						{# L'après-midi #}
+					{% elseif passage.hour|date('H:i') > '12:00' %}
+						<div class="am_pm">
+							{% if not afternoonDisplayed %}
+								<h2>Après-midi</h2>
+								{% set afternoonDisplayed = true %}
+							{% endif %}
+							<ul class="list-rdv {% if passage.etatPassage == 1 %}opacity-change{% endif %}">
+								<div class="list-infoRDV">
+									<div>
+										<div class="nomPatient">{{ meet.patient.name }}
+											{{ meet.patient.firstName }}</div>
+										<div>{{ meet.typeSoin }}</div>
+										<div style="color: red;">{{ meet.infoComplementaire }}</div>
+									</div>
+									<div class="heure">{{ passage.hour|date('H:i') }}</div>
+									<div>
+										{% if passage.etatPassage == 1 %}
+											<a href="{{ path('app_passage_denied', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
+												<img class="buttonCancel" src="../image/croix_blanc.png" alt="">
+											</a>
+										{% endif %}
+										{% if passage.etatPassage == 0 %}
+											<a href="{{ path('app_passage_validated', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
+												<img class="buttonValid" src="../image/check_blanc.png" alt="">
+											</a>
+										{% endif %}
+									</div>
 								</div>
-							</div>
-						{% endif %}
-					{% endfor %}
-				{% endif %}
-			{% endfor %}
-		</ul>
+							</ul>
+						</div>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		{% endfor %}
+
 	</div>
 
 	<style>
 		.container {
-			;
-			/* Taille du text */
-			font-size: 2em;
+			margin: 5px 2px 2px;
+		}
+
+		.am_pm {
+			margin: 0 3px;
+		}
+
+		h2 {
+			color: white;
 		}
 
 		.selectDay {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			padding: 10px;
+			padding: 2px;
 			border: 1px solid #ccc;
 			border-radius: 20px;
 			background-color: #f0f0f0;
-			width: 70%;
-			margin: 0 auto;
+			margin: 0 2px;
 		}
 
 		.selectDay input {
-			font-size: 2em;
+			font-size: 1.5em;
 			width: fit-content;
 			margin: 0 10px;
+		}
+
+		.dateSelected {
+			color: black;
 		}
 
 		.left-button,
@@ -112,24 +131,71 @@
 			border: none;
 			border-radius: 20px;
 			cursor: pointer;
+			margin: 0 10px;
 		}
 
-		.middle-date {
-			border: 1px solid #ccc;
-			border-radius: 5px;
+		.selectDay a img {
+			width: 20px;
+			height: 20px;
 		}
 
 		.list-rdv {
 			margin: 0;
 			padding: 0;
 		}
+
 		.list-infoRDV {
 			display: grid;
-			grid-template-columns: 50% 25% 25%;
+			grid-template-columns: 60% 20% 20%;
 			border: 1px solid black;
-			border-bottom: 3px solid;
 			position: relative;
 			left: 0;
+			background-color: white;
+			margin: 2px 4px;
+			padding: 5px 0;
+			border-radius: 10px;
+			font-size: 1.2em;
+		}
+
+		.list-infoRDV div {
+			justify-self: center;
+			text-align: center;
+		}
+
+		.nomPatient,
+		.heure {
+			font-weight: bold;
+		}
+
+		.nomPatient {
+			font-size: 1.1em;
+		}
+
+		.heure {
+			padding-top: 25%;
+		}
+
+		.buttonValid,
+		.buttonCancel {
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			padding: 2px;
+			position: relative;
+			top: 25%;
+		}
+
+		.buttonCancel {
+			background-color: red;
+		}
+
+		.buttonValid {
+			background-color: green;
+		}
+
+		/* Style pour la div avec opacité changée */
+		.opacity-change {
+			opacity: 0.6; 
 		}
 	</style>
 {% endblock %}
