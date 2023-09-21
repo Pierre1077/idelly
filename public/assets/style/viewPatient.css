@@ -2,17 +2,23 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+#view__patient .patient__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 50px;
 }
 #view__patient .patient__item {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
   font-size: 22px;
 }
 #view__patient .patient__item p {
   color: #ffffff;
   font-weight: 600;
   white-space: nowrap;
+  margin: 0;
 }
 #view__patient .patient__item .variable__patient {
   color: #ffffff;
