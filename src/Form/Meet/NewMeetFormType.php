@@ -21,29 +21,42 @@ class NewMeetFormType extends AbstractType
     {
         $builder
             ->add('infoComplementaire', TextareaType::class, [
-
+                'label'=>false,
+                'attr' => ['class' => 'w-100 rounded-3'],
             ])
             ->add('typeSoin', TextareaType::class, [
-
+                'label'=>false,
+                'attr' => ['class' => 'w-100 rounded-3'],
             ])
             ->add('patient', EntityType::class, [
                 'class' => Patient::class,
                 'choice_label' => 'name',
+                'label'=>false,
+                'attr' => ['class' => 'w-100 rounded-3'],
             ])
             ->add('typePassage', ChoiceType::class, [
+                'label'=>false,
+                'expanded' => true,
                 'choices'  => [
                     'Tous les jours' => 'Tous les jours',
                     'Tous les 3 jours' => 'Tous les 3 jours',
                 ],
             ])
             ->add('hour', TimeType::class, [
+                'label'=>false,
                 'mapped'=>false,
+                'widget' => 'single_text',
+                'attr' => ['class' => 'w-100 rounded-3 py-1 px-2'],
             ])
             ->add('date_debut', DateType::class, [
-
+                'widget' => 'single_text',
+                'label'=>false,
+                'attr' => ['class' => 'w-100 rounded-3 py-1 px-2'],
             ])
             ->add('date_fin', DateType::class, [
-
+                'widget' => 'single_text',
+                'label'=>false,
+                'attr' => ['class' => 'w-100 rounded-3 py-1 px-2'],
             ])
         ;
     }

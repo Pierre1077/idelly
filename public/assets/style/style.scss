@@ -1,7 +1,7 @@
 @use "login";
 @use "patient";
 @use "navBar";
-
+@use "newMeet";
 
 * {
   margin: 0;
@@ -14,3 +14,4 @@ body {
   height: 100vh;
   font-family: "Quicksand",sans-serif;
 }
+
