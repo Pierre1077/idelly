@@ -3,8 +3,95 @@
 {% block title %}Meet New{% endblock %}
 
 {% block body %}
-    New MEET
-    {{ form_start(form) }}
-    <input type="submit">
-    {{ form_end(form) }}
+
+    <div class="container p-3" style="margin-bottom: 100px">
+        {{ form_start(form) }}
+        <div class="row row-cols-2">
+            <div class="col col-9">
+                <div class="h5 m-0 mt-2 text-white">
+                    Nouvelle ordonnance
+                </div>
+            </div>
+            <div class="col col-3">
+                <a href="{{ path('app_meet', {'day': 'now'|date("d-m-Y")})}}" class="btn text-white border border-3 border-white w-100"><i class="fa-solid fa-rotate-left"></i></a>
+            </div>
+        </div>
+
+        <div class="my-3 w-100 bg-white" style="height: 2px;"></div>
+
+
+        <div class="ms-3 text-white">
+
+            <div class="mb-2">
+                <div class="h6 mb-1">
+                    Patient
+                </div>
+                {{ form_row(form.patient) }}
+            </div>
+
+            <div class="my-3 w-100 bg-white" style="height: 1px;"></div>
+
+
+            <div class="mb-2">
+                <div class="h6">
+                    Soins
+                </div>
+                {{ form_row(form.typeSoin) }}
+            </div>
+
+            <div class="my-3 w-100 bg-white" style="height: 1px;"></div>
+
+            <div class="mb-2">
+                <div class="h6">
+                    Organisation des passages
+                </div>
+                <div class="ms-2 mb-3">
+                    <div class="fw-lighter mb-0">
+                        Date du début des passages
+                    </div>
+                    {{ form_row(form.date_debut) }}
+                </div>
+                <div class="ms-2 mb-3">
+                    <div class="fw-lighter mb-0">
+                        Date de fin des passages
+                    </div>
+                    {{ form_row(form.date_fin) }}
+                </div>
+                <div class="ms-2 mb-3">
+                    <div class="fw-lighter mb-0">
+                        Horraire des passages
+                    </div>
+                    {{ form_row(form.hour) }}
+                </div>
+                <div class="ms-2 mb-3">
+                    <div class="fw-lighter mb-0">
+                        Fréquence des passages
+                    </div>
+                    {% for ligne in form.typePassage %}
+                        <div class="mt-1 fw-lighter ms-2">
+                            {{ form_row(ligne) }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <div class="my-3 w-100 bg-white" style="height: 1px;"></div>
+
+            <div class="mb-2">
+                <div class="mb-1 h6">
+                    Infos complémentaire
+                </div>
+                {{ form_row(form.infoComplementaire) }}
+            </div>
+
+            <div class="my-3 w-100 bg-white" style="height: 1px;"></div>
+
+            <input class="btn w-100 border text-white border-white" type="submit">
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 {% endblock %}

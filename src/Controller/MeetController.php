@@ -66,7 +66,7 @@ class MeetController extends AbstractController
         ]);
     }
 
-    #[Route('/meet/new', name: 'app_meet_new')]
+    #[Route('/new/meet', name: 'app_meet_new')]
     public function new(Request $request): Response
     {
         $meet = new Meet();

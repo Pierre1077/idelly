@@ -2,7 +2,7 @@
 @use "patient";
 @use "navBar";
 @use "addPatient";
-
+@use "newMeet";
 
 * {
   margin: 0;
@@ -14,3 +14,4 @@ body {
   background: linear-gradient(180deg, rgba(230,0,126,1) 0%, rgba(102,36,131,1) 100%);
   font-family: "Quicksand",sans-serif;
 }
+
