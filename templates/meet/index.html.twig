@@ -1,8 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div
-		class="container">
+	<div class="container p-3">
+
+		<div class="row row-cols-3">
+			<div class="col col-2">
+				<img src="{{ asset('/image/logo.png') }}" style="width: 100%" alt="">
+			</div>
+			<div class="col col-7">
+				<div class="h5 m-0 mt-2 text-white text-center">
+					Tournée
+				</div>
+			</div>
+			<div class="col col-3">
+			</div>
+		</div>
+
+		<div class="my-3 w-100 bg-white" style="height: 2px;"></div>
 		{# Selecteur de date #}
 		<div class="selectDay">
 			<a class="left-button" href="{{ path('app_meet', {'day': dayDateTime|date_modify("-1 day")|date("d-m-Y")})}}">
