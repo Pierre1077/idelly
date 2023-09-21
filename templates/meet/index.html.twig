@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="container">
+	<div
+		class="container">
 		{# Selecteur de date #}
 		<div class="selectDay">
 			<a class="left-button" href="{{ path('app_meet', {'day': dayDateTime|date_modify("-1 day")|date("d-m-Y")})}}">
@@ -14,11 +15,17 @@
 		</div>
 
 		<ul class="list-rdv">
+			{% set morningDisplayed = false %}
+			{% set afternoonDisplayed = false %}
 			{% for meet in meets %}
-				{% if meet.dateDebut  <= dayDateTime and dayDateTime <= meet.dateFin%}
+				{% if meet.dateDebut <= dayDateTime and dayDateTime <= meet.dateFin %}
 					{% for passage in meet.passages %}
+						{# Le matin #}
 						{% if passage.hour|date('H:i') < '12:00' %}
-							<h2>Matin</h2>
+							{% if not morningDisplayed %}
+								<h2>Matin</h2>
+								{% set morningDisplayed = true %}
+							{% endif %}
 							<div class="list-infoRDV">
 								<div>
 									{{ meet.patient.name }}
@@ -40,10 +47,12 @@
 									{% endif %}
 								</div>
 							</div>
-
-						{% endif %}
-						{% if passage.hour|date('H:i') > '12:00' %}
-							<h2>Après-midi</h2>
+						{# L'après-midi #}
+						{% elseif passage.hour|date('H:i') > '12:00' %}
+							{% if not afternoonDisplayed %}
+								<h2>Après-midi</h2>
+								{% set afternoonDisplayed = true %}
+							{% endif %}
 							<div class="list-infoRDV">
 								<div>
 									{{ meet.patient.name }}
@@ -70,11 +79,12 @@
 				{% endif %}
 			{% endfor %}
 		</ul>
+
 	</div>
 
 	<style>
 		.container {
-			margin: 5px 2px 2px 2px;
+			margin: 5px 2px 2px;
 		}
 
 		.selectDay {
