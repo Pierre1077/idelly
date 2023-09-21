@@ -1,6 +1,5 @@
-twig:
-    default_path: '%kernel.project_dir%/templates'
+# config/packages/twig_test.yaml
 
-when@test:
-    twig:
-        strict_variables: true
+twig:
+    strict_variables: true
+    # Ajoutez d'autres configurations spécifiques aux tests si nécessaire
