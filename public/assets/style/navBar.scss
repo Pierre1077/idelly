@@ -1,0 +1,35 @@
+nav {
+  background: #ffffff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  padding: 16px 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    p {
+      font-size: 8px;
+    }
+  }
+
+  a{
+    color: #151519;
+
+    i {
+      font-size: 24px;
+    }
+  }
+}

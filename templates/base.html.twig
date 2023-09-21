@@ -18,12 +18,54 @@
     </body>
     {% if app.request.attributes.get('_route') not in ['app_register', 'app_login'] %}
         <nav>
-            <a href="{{ path('app_more') }}">+</a>
-            <a href="{{ path('app_meet', {'day': 'now'|date('d-m-Y')})}}">Meet</a>
-            <a href="{{ path('app_patients') }}">Patient</a>
-            <a href="{{ path('app_transmissions') }}">Transmission</a>
-            <a href="{{ path('app_messagerie') }}">Messagerie</a>
-            <a href="{{ path('app_menu') }}">Menu</a>
+            <div>
+                <a
+                        href="{{ path('app_more') }}"
+                        {% if app.request.attributes.get('_route')  in ['app_more'] %}style="color: #e6007e!important;"{% endif %}
+                >
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+            </div>
+            <div>
+                <a
+                        href="{{ path('app_meet', {'day': 'now'|date('d-m-Y')})}}"
+                        {% if app.request.attributes.get('_route')  in ['app_meet'] %}style="color: #e6007e!important;"{% endif %}
+                >
+                    <i class="fa-solid fa-car"></i>
+                </a>
+                <p {% if app.request.attributes.get('_route')  in ['app_meet'] %}style="color: #e6007e!important;"{% endif %}>TOURNEE</p>
+            </div>
+            <div>
+                <a
+                        href="{{ path('app_patients') }}"
+                        {% if app.request.attributes.get('_route')  in ['app_patients'] %}style="color: #e6007e!important;"{% endif %}
+                >
+                    <i class="fa-solid fa-user"></i>
+                </a>
+                <p {% if app.request.attributes.get('_route')  in ['app_patients'] %}style="color: #e6007e!important;"{% endif %}>PATIENTS</p>
+            </div>
+            <div>
+                <a
+                        href="{{ path('app_transmissions') }}"
+                        {% if app.request.attributes.get('_route')  in ['app_transmissions'] %}style="color: #e6007e!important;"{% endif %}
+                >
+                    <i class="fa-solid fa-comments"></i>
+                </a>
+                <p {% if app.request.attributes.get('_route')  in ['app_transmissions'] %}style="color: #e6007e!important;"{% endif %}>TRANSMISSION</p>
+            </div>
+            <div>
+                <a
+                        href="{{ path('app_messagerie') }}"
+                        {% if app.request.attributes.get('_route')  in ['app_messagerie'] %}style="color: #e6007e!important;"{% endif %}
+                >
+                    <i class="fa-solid fa-comment"></i>
+                </a>
+                <p {% if app.request.attributes.get('_route')  in ['app_messagerie'] %}style="color: #e6007e!important;"{% endif %}>MESSAGERIE</p>
+            </div>
+            <div>
+                <a href="{{ path('app_menu') }}"><i class="fa-solid fa-bars"></i></a>
+                <p>PLUS</p>
+            </div>
         </nav>
     {% endif %}
 </html>
