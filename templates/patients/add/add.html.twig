@@ -1,62 +1,130 @@
-<div>
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PatientsController!{% endblock %}
+
+{% block body %}
+
+<div id="add__patient">
+    <div class="banner">
+        <h2>Ajouter un patient</h2>
+    </div>
     {{ form_start(form) }}
-    <div>
-        <div>
-            {{ form_label(form.name) }}
-            {{ form_widget(form.name) }}
+    <div class="form__container">
+        <div class="input__container">
+            <div>
+                {{ form_label(form.name, 'Nom') }}
+            </div>
+            <div>
+                {{ form_widget(form.name) }}
+            </div>
         </div>
-        <div>
-            {{ form_label(form.firstname) }}
-            {{ form_widget(form.firstname) }}
+        <div class="input__container">
+            <div>
+                {{ form_label(form.firstname, 'Prénom') }}
+            </div>
+            <div>
+                {{ form_widget(form.firstname) }}
+            </div>
         </div>
-        <div>
-            {{ form_label(form.adress) }}
-            {{ form_widget(form.adress) }}
+        <div class="input__container">
+            <div>
+                {{ form_label(form.adress) }}
+            </div>
+            <div>
+                {{ form_widget(form.adress) }}
+            </div>
         </div>
-        <div>
-            {{ form_label(form.phone) }}
-            {{ form_widget(form.phone) }}
-        </div><div>
-        {{ form_label(form.birthday) }}
-        {{ form_widget(form.birthday) }}
+        <div class="input__container">
+            <div>
+                {{ form_label(form.phone) }}
+            </div>
+            <div>
+                {{ form_widget(form.phone) }}
+            </div>
+        </div>
+        <div class="input__container">
+            <div>
+                {{ form_label(form.birthday) }}
+            </div>
+            <div>
+                {{ form_widget(form.birthday) }}
+            </div>
+        </div>
+        <div class="input__container">
+            <div>
+                {{ form_label(form.numSecu) }}
+            </div>
+            <div>
+                {{ form_widget(form.numSecu) }}
+            </div>
+        </div>
+        <div class="input__container">
+            <div>
+                {{ form_label(form.genre) }}
+            </div>
+            <div>
+                {{ form_widget(form.genre) }}
+            </div>
+        </div>
+        <div class="input__container">
+            <div>
+                {{ form_label(form.infoSupAdress) }}
+            </div>
+            <div>
+                {{ form_widget(form.infoSupAdress) }}
+            </div>
+        </div>
+        <div class="input__container">
+            <div>
+                {{ form_label(form.fullNameMedecinTraitant) }}
+            </div>
+            <div>
+                {{ form_widget(form.fullNameMedecinTraitant) }}
+            </div>
+        </div>
+        <div class="input__container">
+            <div>
+                {{ form_label(form.PhoneMedecinTraitant) }}
+            </div>
+            <div>
+                {{ form_widget(form.PhoneMedecinTraitant) }}
+            </div>
+        </div>
+        <div class="input__container">
+            <div>
+                {{ form_label(form.PharmacieName) }}
+            </div>
+            <div>
+                {{ form_widget(form.PharmacieName) }}
+            </div>
+        </div>
+        <div class="input__container">
+            <div>
+                {{ form_label(form.PhonePharmacie) }}
+            </div>
+            <div>
+                {{ form_widget(form.PhonePharmacie) }}
+            </div>
+        </div>
+        <div class="input__container">
+            <div>
+                {{ form_label(form.fullNameUrgentContact) }}
+            </div>
+            <div>
+                {{ form_widget(form.fullNameUrgentContact) }}
+            </div>
+        </div>
+        <div class="input__container">
+            <div>
+                {{ form_label(form.phoneUrgentContact) }}
+            </div>
+            <div>
+                {{ form_widget(form.phoneUrgentContact) }}
+            </div>
+        </div>
+        <button type="submit">Ajouter</button>
     </div>
-        <div>
-            {{ form_label(form.numSecu) }}
-            {{ form_widget(form.numSecu) }}
-        </div>
-        <div>
-            {{ form_label(form.genre) }}
-            {{ form_widget(form.genre) }}
-        </div>
-        <div>
-            {{ form_label(form.infoSupAdress) }}
-            {{ form_widget(form.infoSupAdress) }}
-        </div>
-        <div>
-            {{ form_label(form.fullNameMedecinTraitant) }}
-            {{ form_widget(form.fullNameMedecinTraitant) }}
-        </div>
-        <div>
-            {{ form_label(form.PhoneMedecinTraitant) }}
-            {{ form_widget(form.PhoneMedecinTraitant) }}
-        </div>
-        <div>
-            {{ form_label(form.PharmacieName) }}
-            {{ form_widget(form.PharmacieName) }}
-        </div>
-        <div>
-            {{ form_label(form.PhonePharmacie) }}
-            {{ form_widget(form.PhonePharmacie) }}
-        </div>
-        <div>
-            {{ form_label(form.fullNameUrgentContact) }}
-            {{ form_widget(form.fullNameUrgentContact) }}
-        </div>
-        <div>
-            {{ form_label(form.phoneUrgentContact) }}
-            {{ form_widget(form.phoneUrgentContact) }}
-        </div>
-    </div>
-    <button type="submit">Enregistrer</button>
     {{ form_end(form) }}
 </div>
+
+{% endblock %}
