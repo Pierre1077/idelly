@@ -27,14 +27,14 @@
 								<h2>Matin</h2>
 								{% set morningDisplayed = true %}
 							{% endif %}
-							<ul class="list-rdv {% if passage.etatPassage == 1 %}opacity-change{% endif %}">
+							<div class="list-rdv {% if passage.etatPassage == 1 %}opacity-change{% endif %}">
 								<div class="list-infoRDV">
-									<div>
+									<a class="redirectionId" href="{{ path('app_meet_show', {'id': passage.id } ) }}">
 										<div class="nomPatient">{{ meet.patient.name }}
 											{{ meet.patient.firstName }}</div>
 										<div>{{ meet.typeSoin }}</div>
 										<div style="color: red;">{{ meet.infoComplementaire }}</div>
-									</div>
+									</a>
 									<div class="heure">{{ passage.hour|date('H:i') }}</div>
 									<div>
 										{% if passage.etatPassage == 1 %}
@@ -49,7 +49,7 @@
 										{% endif %}
 									</div>
 								</div>
-							</ul>
+							</div>
 						</div>
 						{# L'après-midi #}
 					{% elseif passage.hour|date('H:i') > '12:00' %}
@@ -60,12 +60,12 @@
 							{% endif %}
 							<ul class="list-rdv {% if passage.etatPassage == 1 %}opacity-change{% endif %}">
 								<div class="list-infoRDV">
-									<div>
+									<a class="redirectionId" href="{{ path('app_meet_show', {'id': passage.id } ) }}">
 										<div class="nomPatient">{{ meet.patient.name }}
 											{{ meet.patient.firstName }}</div>
 										<div>{{ meet.typeSoin }}</div>
 										<div style="color: red;">{{ meet.infoComplementaire }}</div>
-									</div>
+									</a>
 									<div class="heure">{{ passage.hour|date('H:i') }}</div>
 									<div>
 										{% if passage.etatPassage == 1 %}
@@ -93,6 +93,21 @@
 		.container {
 			margin: 5px 2px 2px;
 			min-height: 100vh;
+			padding-bottom: 50px;
+		}
+
+		a {
+			text-decoration: none; /* Supprimer le soulignement */
+			color: inherit; /* Utiliser la couleur par défaut du texte */
+			outline: none; /* Supprimer le surlignage au focus */
+			/* Autres réinitialisations de style si nécessaire */
+		}
+
+		.redirectionId {
+			text-decoration: none; /* Supprimer le soulignement */
+			color: inherit; /* Utiliser la couleur par défaut du texte */
+			outline: none; /* Supprimer le surlignage au focus */
+			/* Autres réinitialisations de style si nécessaire */
 		}
 
 		.am_pm {
@@ -111,7 +126,7 @@
 			border: 1px solid #ccc;
 			border-radius: 20px;
 			background-color: #f0f0f0;
-			margin: 0 2px;
+			margin: 2px;
 		}
 
 		.selectDay input {
@@ -121,6 +136,7 @@
 		}
 
 		.dateSelected {
+			padding-top: 3%;
 			color: black;
 		}
 
@@ -156,6 +172,7 @@
 			padding: 5px 0;
 			border-radius: 10px;
 			font-size: 1.2em;
+
 		}
 
 		.list-infoRDV div {
@@ -196,7 +213,7 @@
 
 		/* Style pour la div avec opacité changée */
 		.opacity-change {
-			opacity: 0.6; 
+			opacity: 0.6;
 		}
 	</style>
 {% endblock %}
