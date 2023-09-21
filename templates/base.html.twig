@@ -21,11 +21,13 @@
         <nav>
             <div>
                 <a
-                        href="{{ path('app_more') }}"
-                        {% if app.request.attributes.get('_route')  in ['app_more'] %}style="color: #e6007e!important;"{% endif %}
+                        href="{{ path('app_meet_new') }}"
+                        {% if app.request.attributes.get('_route')  in ['app_meet_new'] %}style="color: #e6007e!important;"{% endif %}
                 >
                     <i class="fa-solid fa-plus"></i>
                 </a>
+{#                <p {% if app.request.attributes.get('_route')  in ['app_more'] %}style="color: #e6007e!important;"{% endif %}>PATIENTS</p>#}
+
             </div>
             <div>
                 <a
@@ -47,7 +49,6 @@
             </div>
             <div>
                 <a
-                        href="{{ path('app_transmissions') }}"
                         {% if app.request.attributes.get('_route')  in ['app_transmissions'] %}style="color: #e6007e!important;"{% endif %}
                 >
                     <i class="fa-solid fa-comments"></i>
@@ -56,7 +57,6 @@
             </div>
             <div>
                 <a
-                        href="{{ path('app_messagerie') }}"
                         {% if app.request.attributes.get('_route')  in ['app_messagerie'] %}style="color: #e6007e!important;"{% endif %}
                 >
                     <i class="fa-solid fa-comment"></i>
@@ -64,7 +64,7 @@
                 <p {% if app.request.attributes.get('_route')  in ['app_messagerie'] %}style="color: #e6007e!important;"{% endif %}>MESSAGERIE</p>
             </div>
             <div>
-                <a href="{{ path('app_menu') }}"><i class="fa-solid fa-bars"></i></a>
+                <a ><i class="fa-solid fa-bars"></i></a>
                 <p>PLUS</p>
             </div>
         </nav>
