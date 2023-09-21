@@ -1,0 +1,77 @@
+#patients .banner {
+  background: #ffffff;
+  padding: 16px 0;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+#patients .banner h2 {
+  color: #151519;
+  text-align: center;
+  font-size: 28px;
+}
+#patients .search__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 28px;
+}
+#patients .search__form #search-form {
+  width: 60%;
+}
+#patients .search__form #search-form input {
+  width: 100%;
+  border: none;
+  height: 40px;
+  border-radius: 16px;
+  padding-left: 15px;
+}
+#patients .search__form #search-form input:focus {
+  outline: none;
+}
+#patients .search__form .add__patient {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+#patients .search__form .add__patient i {
+  color: #151519;
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 99%;
+  font-size: 22px;
+}
+#patients #list__patients, #patients #list__patient__search {
+  margin-top: 52px;
+}
+#patients #list__patients table, #patients #list__patient__search table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 22px;
+}
+#patients #list__patients table td, #patients #list__patient__search table td {
+  width: 33%;
+  text-align: center;
+  padding: 8px;
+}
+#patients #list__patients table thead, #patients #list__patient__search table thead {
+  background: #ffffff;
+  font-weight: 600;
+}
+#patients #list__patients table thead th, #patients #list__patient__search table thead th {
+  padding: 8px;
+}
+#patients #list__patients table tbody, #patients #list__patient__search table tbody {
+  color: #151519;
+}
+#patients #list__patients table tbody tr:nth-child(odd), #patients #list__patient__search table tbody tr:nth-child(odd) {
+  background: #e6007e;
+}
+#patients #list__patients table tbody tr:nth-child(even), #patients #list__patient__search table tbody tr:nth-child(even) {
+  background: #fc38a0;
+}
+#patients #list__patients table tbody tr a, #patients #list__patient__search table tbody tr a {
+  color: #151519;
+}
+
+/*# sourceMappingURL=patient.css.map */

@@ -1,0 +1,98 @@
+#patients {
+  .banner {
+    background: #ffffff;
+    padding: 16px 0;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+
+    h2 {
+      color: #151519;
+      text-align: center;
+      font-size: 28px;
+    }
+  }
+
+  .search__form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 28px;
+
+    #search-form {
+      width: 60%;
+      input {
+        width: 100%;
+        border: none;
+        height: 40px;
+        border-radius: 16px;
+        padding-left: 15px;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .add__patient {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+
+
+
+      i {
+        color: #151519;
+        background: #ffffff;
+        padding: 10px;
+        border-radius: 99%;
+        font-size: 22px;
+      }
+    }
+  }
+
+  #list__patients, #list__patient__search {
+    margin-top: 52px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 22px;
+
+      td {
+        width: 33%;
+        text-align: center;
+        padding: 8px;
+
+      }
+
+      thead {
+        background: #ffffff;
+        font-weight: 600;
+
+        th {
+          padding: 8px;
+        }
+      }
+
+      tbody {
+        color: #151519;
+
+        tr {
+          &:nth-child(odd) {
+            background: #e6007e;
+          }
+
+          &:nth-child(even) {
+            background: #fc38a0;
+          }
+
+          a {
+            color: #151519;
+          }
+
+        }
+      }
+    }
+  }
+}
+

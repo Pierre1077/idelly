@@ -66,17 +66,128 @@
   padding: 8px 32px;
 }
 
-.cardAttrib {
-  background-color: rgba(0, 0, 0, 0);
-  border: #f0f0f0 0;
+#patients .banner {
+  background: #ffffff;
+  padding: 16px 0;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+#patients .banner h2 {
+  color: #151519;
+  text-align: center;
+  font-size: 28px;
+}
+#patients .search__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 28px;
+}
+#patients .search__form #search-form {
+  width: 60%;
+}
+#patients .search__form #search-form input {
+  width: 100%;
+  border: none;
+  height: 40px;
+  border-radius: 16px;
+  padding-left: 15px;
+}
+#patients .search__form #search-form input:focus {
+  outline: none;
+}
+#patients .search__form .add__patient {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+#patients .search__form .add__patient i {
+  color: #151519;
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 99%;
+  font-size: 22px;
+}
+#patients #list__patients, #patients #list__patient__search {
+  margin-top: 52px;
+}
+#patients #list__patients table, #patients #list__patient__search table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 22px;
+}
+#patients #list__patients table td, #patients #list__patient__search table td {
+  width: 33%;
+  text-align: center;
+  padding: 8px;
+}
+#patients #list__patients table thead, #patients #list__patient__search table thead {
+  background: #ffffff;
+  font-weight: 600;
+}
+#patients #list__patients table thead th, #patients #list__patient__search table thead th {
+  padding: 8px;
+}
+#patients #list__patients table tbody, #patients #list__patient__search table tbody {
+  color: #151519;
+}
+#patients #list__patients table tbody tr:nth-child(odd), #patients #list__patient__search table tbody tr:nth-child(odd) {
+  background: #e6007e;
+}
+#patients #list__patients table tbody tr:nth-child(even), #patients #list__patient__search table tbody tr:nth-child(even) {
+  background: #fc38a0;
+}
+#patients #list__patients table tbody tr a, #patients #list__patient__search table tbody tr a {
+  color: #151519;
 }
 
-body {
+nav {
+  background: #ffffff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+}
+nav div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+nav div p {
+  font-size: 8px;
+}
+nav a {
+  color: #151519;
+}
+nav a i {
+  font-size: 24px;
+}
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: rgb(230, 0, 126);
-  background: linear-gradient(180deg, rgb(230, 0, 126) 0%, rgb(102, 36, 131) 100%);
+}
+
+body {
+  background: #e6007e;
+  background: linear-gradient(180deg, #e6007e 0%, #662483 100%);
+  height: 100vh;
+  font-family: "Quicksand", sans-serif;
+
+.cardAttrib {
+  background-color: rgba(0, 0, 0, 0);
+  border: #f0f0f0 0;
 }
 
 /*# sourceMappingURL=style.css.map */

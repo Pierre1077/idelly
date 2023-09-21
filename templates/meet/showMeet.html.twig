@@ -3,5 +3,63 @@
 {% block title %}Meet Show{% endblock %}
 
 {% block body %}
-    Show MEET
+    <ul>
+            
+                <p>Pour {{ meet.patient.firstname }} {{ meet.patient.name }}</p>
+                <u>SOINS</u>
+                <p class="gray-margin">{{ meet.typeSoin }}</p>
+                <u>FREQUENCE</u>
+                <ul>DEBUT DES PASSAGES :</ul>
+                <p class="gray-margin">
+                    <span class="date">{{ meet.dateDebut|date('d/m/Y') }}</span>
+                    <img src="{{ asset('../image/icone-plus.png') }}" class="right-image">
+                </p>
+
+                <ul>Passage 1</ul>                    
+                <div class="checkbox-wrapper">
+                <p>{{ meet.passages[0].hour|date('H:i') }}</p>
+                <label class="custom-checkbox">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                Début des passages
+                </label>
+                </div>
+
+                <ul>Passage 2</ul>
+                   <div class="checkbox-wrapper">
+                <p>{{ meet.passages[0].hour|date('H:i') }}</p>
+                <label class="custom-checkbox">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                Début des passages
+                </label>
+                </div>
+                
+                <u>Type passage</u>
+                <ul>{{meet.typePassage}}</ul>
+
+                <style>
+                .gray-margin {
+                     margin: 10px; 
+                     background-color: #DCDCDC; 
+                     padding: 5px;
+                     border-radius: 30px;
+
+                }
+                .checkbox-wrapper {
+                 display: flex; 
+                 align-items: center;
+                }      
+                       
+
+                .right-image {
+                    float: right; 
+                    width: 20px; 
+                    height: auto; 
+                }
+
+                </style>
+
+            
+    </ul>
 {% endblock %}
