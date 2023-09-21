@@ -6,6 +6,7 @@ use App\Entity\Meet;
 use App\Entity\Passage;
 use App\Form\Meet\NewMeetFormType;
 use App\Repository\MeetRepository;
+use App\Repository\PassageRepository;
 use DateTime;
 use Doctrine\DBAL\Types\DateType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,11 +19,13 @@ class MeetController extends AbstractController
 {
     private MeetRepository $meetRepository;
     private EntityManagerInterface $entityManager;
+    private PassageRepository $passageRepository;
 
-    public function __construct(MeetRepository $meetRepository, EntityManagerInterface $entityManager)
+    public function __construct(MeetRepository $meetRepository, EntityManagerInterface $entityManager, PassageRepository $passageRepository)
     {
         $this->meetRepository = $meetRepository;
         $this->entityManager = $entityManager;
+        $this->passageRepository = $passageRepository;
     }
 
     #[Route('/meet/{day}', name: 'app_meet')]
