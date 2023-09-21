@@ -1,0 +1,28 @@
+#view__patient {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#view__patient .patient__item {
+  display: flex;
+  gap: 8px;
+  font-size: 22px;
+}
+#view__patient .patient__item p {
+  color: #ffffff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+#view__patient .patient__item .variable__patient {
+  color: #ffffff;
+}
+#view__patient .patient__item .patient__name {
+  font-weight: 600;
+  text-align: center;
+}
+#view__patient form {
+  margin-top: 25px;
+}
+
+/*# sourceMappingURL=viewPatient.css.map */

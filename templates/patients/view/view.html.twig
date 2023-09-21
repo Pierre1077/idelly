@@ -1,6 +1,94 @@
-{{ patient.name }}
-<form method="POST" action="{{ path('app_patients_delete', {'id': patient.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');">
-    <button type="submit" class="btn btn-danger">Supprimer</button>
-    <a href="{{ path('app_patients') }}">Retour à la liste des patients</a>
+{% extends 'base.html.twig' %}
 
-</form>
+{% block title %}Hello PatientsController!{% endblock %}
+
+{% block body %}
+
+    <div id="view__patient" class="container p-3">
+        <div class="row row-cols-3">
+            <div class="col col-2">
+                <img src="{{ asset('/image/logo.png') }}" style="width: 100%" alt="">
+            </div>
+            <div class="col col-7">
+                <div class="h5 m-0 mt-2 text-white text-center">
+                        <div style="white-space: nowrap">{{ patient.name }} {{ patient.firstname }}</div>
+                </div>
+            </div>
+            <div class="col col-3">
+                <a href="{{ path('app_patients') }}" class="btn text-white border border-3 border-white w-100"><i class="fa-solid fa-rotate-left"></i></a>
+            </div>
+        </div>
+
+        <div class="my-3 w-100 bg-white" style="height: 2px;"></div>
+        <div class="patient__wrapper">
+            <div class="patient__item">
+            </div>
+            {% if patient.adress %}
+                <div class="patient__item">
+                    <p>Adresse :</p>
+                    <div class="variable__patient">
+                        <div>{{ patient.adress }}</div>
+                        <div>{{ patient.infoSupAdress }}</div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if patient.phone %}
+                <div class="patient__item">
+                    <p>Tel :</p>
+                    <div class="variable__patient">
+                        {{ patient.phone }}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if patient.numSecu %}
+                <div class="patient__item">
+                    <p>Num. Sécu :</p>
+                    <div class="variable__patient">
+                        {{ patient.numSecu }}
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="patient__item">
+                <div class="variable__patient">
+                    {{ patient.genre }}
+                </div>
+            </div>
+            {% if patient.fullNameMedecinTraitant %}
+                <div class="patient__item">
+                    <p>Medecin Traitant :</p>
+                    <div class="variable__patient">
+                        <div>{{ patient.fullNameMedecinTraitant }}</div>
+                        <div>{{ patient.PhoneMedecinTraitant }}</div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if patient.PharmacieName %}
+                <div class="patient__item">
+                    <p>Pharmacie :</p>
+                    <div class="variable__patient">
+                        <div>{{ patient.PharmacieName }}</div>
+                        <div>{{ patient.PhonePharmacie }}</div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if patient.fullNameUrgentContact and patient.phoneUrgentContact  %}
+                <div class="patient__item">
+                    <p>Contact Urgence :</p>
+                    <div class="variable__patient">
+                        <div>{{ patient.fullNameUrgentContact }}</div>
+                        <div>{{ patient.phoneUrgentContact }}</div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <form method="POST" action="{{ path('app_patients_delete', {'id': patient.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');">
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+            </form>
+{#            <a href="{{ path('app_patients') }}">Retour à la liste des patients</a>#}
+        </div>
+    </div>
+
+{% endblock %}
