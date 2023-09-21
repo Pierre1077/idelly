@@ -8,7 +8,7 @@
 			<a class="left-button" href="{{ path('app_meet', {'day': dayDateTime|date_modify("-1 day")|date("d-m-Y")})}}">
 				<img src="../image/fleche_gauche.png" alt="">
 			</a>
-			<h2>{{ dayDateTime|date('d/m/Y') }}</h2>
+			<h2 class="dateSelected">{{ dayDateTime|date('d/m/Y') }}</h2>
 			<a class="right-button" href="{{ path('app_meet', {'day': dayDateTime|date_modify("+1 day")|date("d-m-Y")})}}">
 				<img src="../image/fleche_droite.png" alt="">
 			</a>
@@ -47,7 +47,7 @@
 									{% endif %}
 								</div>
 							</div>
-						{# L'après-midi #}
+							{# L'après-midi #}
 						{% elseif passage.hour|date('H:i') > '12:00' %}
 							{% if not afternoonDisplayed %}
 								<h2>Après-midi</h2>
@@ -87,6 +87,10 @@
 			margin: 5px 2px 2px;
 		}
 
+		h2 {
+			color: white;
+		}
+
 		.selectDay {
 			display: flex;
 			align-items: center;
@@ -102,6 +106,10 @@
 			font-size: 1.5em;
 			width: fit-content;
 			margin: 0 10px;
+		}
+
+		.dateSelected {
+			color: black;
 		}
 
 		.left-button,
@@ -120,22 +128,26 @@
 			height: 20px;
 		}
 
-		.middle-date {
-			border: 1px solid #ccc;
-			border-radius: 5px;
-		}
-
 		.list-rdv {
 			margin: 0;
 			padding: 0;
 		}
+
 		.list-infoRDV {
 			display: grid;
 			grid-template-columns: 50% 25% 25%;
 			border: 1px solid black;
-			border-bottom: 3px solid;
 			position: relative;
 			left: 0;
+			background-color: white;
+			margin: 0 5px;
+			border-radius: 5px;
+			font-size: 1.2em;
+		}
+
+		.list-infoRDV div {
+			justify-self: center;
+			text-align: center;
 		}
 	</style>
 {% endblock %}
