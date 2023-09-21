@@ -4,10 +4,23 @@
 
 {% block body %}
 
-<div id="add__patient">
-    <div class="banner">
-        <h2>Ajouter un patient</h2>
+<div class="container p-3" style="min-height: 100vh" id="add__patient">
+    <div class="row row-cols-3">
+        <div class="col col-2">
+            <img src="{{ asset('/image/logo.png') }}" style="width: 100%" alt="">
+        </div>
+        <div class="col col-7">
+            <div class="h5 m-0 mt-2 text-white text-center">
+                Ajouter un patient
+            </div>
+        </div>
+        <div class="col col-3">
+            <a href="{{ path('app_patients')}}" class="btn text-white border border-3 border-white w-100"><i class="fa-solid fa-rotate-left"></i></a>
+        </div>
     </div>
+
+    <div class="my-3 w-100 bg-white" style="height: 2px;"></div>
+
     {{ form_start(form) }}
     <div class="form__container">
         <div class="input__container">
@@ -122,7 +135,8 @@
                 {{ form_widget(form.phoneUrgentContact) }}
             </div>
         </div>
-        <button type="submit">Ajouter</button>
+        <input class="btn w-100 border text-white border-white" type="submit">
+
     </div>
     {{ form_end(form) }}
 </div>

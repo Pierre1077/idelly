@@ -4,24 +4,36 @@
 
 {% block body %}
 
-<div id="patients">
-    <div class="banner">
-        <h2>Patients</h2>
+<div class="container p-3" style="min-height: 100vh" id="patients">
+    <div class="row row-cols-3">
+        <div class="col col-2">
+            <img src="{{ asset('/image/logo.png') }}" style="width: 100%" alt="">
+        </div>
+        <div class="col col-7">
+            <div class="h5 m-0 mt-2 text-white text-center">
+                Patients
+            </div>
+        </div>
+        <div class="col col-3">
+            <a href="{{ path('app_meet', {'day': 'now'|date("d-m-Y")})}}" class="btn text-white border border-3 border-white w-100"><i class="fa-solid fa-rotate-left"></i></a>
+        </div>
     </div>
+
+    <div class="my-3 w-100 bg-white" style="height: 2px;"></div>
+
     <div class="search__form">
         <form id="search-form">
             <input type="text" id="search-input" placeholder="Rechercher un patient">
         </form>
-        <div class="add__patient">
+        <div class="add__patient ms-2">
             <a href="{{ path('app_patients_add') }}"><i class="fa-solid fa-plus"></i></a>
-            <p>Ajouter un patient</p>
         </div>
     </div>
-    <div id="list__patient__search">
-        <table>
+    <div cl id="list__patient__search">
+        <table class="">
             <thead>
             <tr>
-                <th>NOM</th>
+                <th>Nom</th>
                 <th>Prénom</th>
                 <th></th>
             </tr>
