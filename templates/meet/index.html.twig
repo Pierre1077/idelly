@@ -39,12 +39,12 @@
 									<div>
 										{% if passage.etatPassage == 1 %}
 											<a href="{{ path('app_passage_denied', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
-												<img class="buttonCancel" src="../image/croix_blanc.png" alt="">
+												<img class="buttonValid" src="../image/check_blanc.png" alt="">
 											</a>
 										{% endif %}
 										{% if passage.etatPassage == 0 %}
 											<a href="{{ path('app_passage_validated', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
-												<img class="buttonValid" src="../image/check_blanc.png" alt="">
+												<img class="buttonCancel" src="../image/croix_blanc.png" alt="">
 											</a>
 										{% endif %}
 									</div>
@@ -70,12 +70,12 @@
 									<div>
 										{% if passage.etatPassage == 1 %}
 											<a href="{{ path('app_passage_denied', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
-												<img class="buttonCancel" src="../image/croix_blanc.png" alt="">
+												<img class="buttonValid" src="../image/check_blanc.png" alt="">
 											</a>
 										{% endif %}
 										{% if passage.etatPassage == 0 %}
 											<a href="{{ path('app_passage_validated', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
-												<img class="buttonValid" src="../image/check_blanc.png" alt="">
+												<img class="buttonCancel" src="../image/croix_blanc.png" alt="">
 											</a>
 										{% endif %}
 									</div>
@@ -92,6 +92,7 @@
 	<style>
 		.container {
 			margin: 5px 2px 2px;
+			min-height: 100vh;
 		}
 
 		.am_pm {
