@@ -14,77 +14,88 @@
 			</a>
 		</div>
 
-		<ul class="list-rdv">
-			{% set morningDisplayed = false %}
-			{% set afternoonDisplayed = false %}
-			{% for meet in meets %}
-				{% if meet.dateDebut <= dayDateTime and dayDateTime <= meet.dateFin %}
-					{% for passage in meet.passages %}
-						{# Le matin #}
-						{% if passage.hour|date('H:i') < '12:00' %}
+		{% set morningDisplayed = false %}
+		{% set afternoonDisplayed = false %}
+		{% for meet in meets %}
+			{% if meet.dateDebut <= dayDateTime and dayDateTime <= meet.dateFin %}
+				{% for passage in meet.passages %}
+
+					{# Le matin #}
+					{% if passage.hour|date('H:i') < '12:00' %}
+						<div class="am_pm">
 							{% if not morningDisplayed %}
 								<h2>Matin</h2>
 								{% set morningDisplayed = true %}
 							{% endif %}
-							<div class="list-infoRDV">
-								<div>
-									<div class="nomPatient">{{ meet.patient.name }}
-										{{ meet.patient.firstName }}</div>
-									<div>{{ meet.typeSoin }}</div>
-									<div style="color: red;">{{ meet.infoComplementaire }}</div>
+							<ul class="list-rdv {% if passage.etatPassage == 1 %}opacity-change{% endif %}">
+								<div class="list-infoRDV">
+									<div>
+										<div class="nomPatient">{{ meet.patient.name }}
+											{{ meet.patient.firstName }}</div>
+										<div>{{ meet.typeSoin }}</div>
+										<div style="color: red;">{{ meet.infoComplementaire }}</div>
+									</div>
+									<div class="heure">{{ passage.hour|date('H:i') }}</div>
+									<div>
+										{% if passage.etatPassage == 1 %}
+											<a href="{{ path('app_passage_denied', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
+												<img class="buttonCancel" src="../image/croix_blanc.png" alt="">
+											</a>
+										{% endif %}
+										{% if passage.etatPassage == 0 %}
+											<a href="{{ path('app_passage_validated', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
+												<img class="buttonValid" src="../image/check_blanc.png" alt="">
+											</a>
+										{% endif %}
+									</div>
 								</div>
-								<div class="heure">{{ passage.hour|date('H:i') }}</div>
-								<div>
-									{% if passage.etatPassage == 1 %}
-										<a href="{{ path('app_passage_denied', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
-											<img class="buttonCancel" src="../image/croix_blanc.png" alt="">
-										</a>
-									{% endif %}
-									{% if passage.etatPassage == 0 %}
-										<a href="{{ path('app_passage_validated', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
-											<img class="buttonValid" src="../image/check_blanc.png" alt="">
-										</a>
-									{% endif %}
-								</div>
-							</div>
-							{# L'après-midi #}
-						{% elseif passage.hour|date('H:i') > '12:00' %}
+							</ul>
+						</div>
+						{# L'après-midi #}
+					{% elseif passage.hour|date('H:i') > '12:00' %}
+						<div class="am_pm">
 							{% if not afternoonDisplayed %}
 								<h2>Après-midi</h2>
 								{% set afternoonDisplayed = true %}
 							{% endif %}
-							<div class="list-infoRDV">
-								<div>
-									<div class="nomPatient">{{ meet.patient.name }}
-										{{ meet.patient.firstName }}</div>
-									<div>{{ meet.typeSoin }}</div>
-									<div style="color: red;">{{ meet.infoComplementaire }}</div>
+							<ul class="list-rdv {% if passage.etatPassage == 1 %}opacity-change{% endif %}">
+								<div class="list-infoRDV">
+									<div>
+										<div class="nomPatient">{{ meet.patient.name }}
+											{{ meet.patient.firstName }}</div>
+										<div>{{ meet.typeSoin }}</div>
+										<div style="color: red;">{{ meet.infoComplementaire }}</div>
+									</div>
+									<div class="heure">{{ passage.hour|date('H:i') }}</div>
+									<div>
+										{% if passage.etatPassage == 1 %}
+											<a href="{{ path('app_passage_denied', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
+												<img class="buttonCancel" src="../image/croix_blanc.png" alt="">
+											</a>
+										{% endif %}
+										{% if passage.etatPassage == 0 %}
+											<a href="{{ path('app_passage_validated', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
+												<img class="buttonValid" src="../image/check_blanc.png" alt="">
+											</a>
+										{% endif %}
+									</div>
 								</div>
-								<div class="heure">{{ passage.hour|date('H:i') }}</div>
-								<div>
-									{% if passage.etatPassage == 1 %}
-										<a href="{{ path('app_passage_denied', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
-											<img class="buttonCancel" src="../image/croix_blanc.png" alt="">
-										</a>
-									{% endif %}
-									{% if passage.etatPassage == 0 %}
-										<a href="{{ path('app_passage_validated', {'day': dayDateTime|date("d-m-Y"), 'passage': passage.id } ) }}">
-											<img class="buttonValid" src="../image/check_blanc.png" alt="">
-										</a>
-									{% endif %}
-								</div>
-							</div>
-						{% endif %}
-					{% endfor %}
-				{% endif %}
-			{% endfor %}
-		</ul>
+							</ul>
+						</div>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		{% endfor %}
 
 	</div>
 
 	<style>
 		.container {
 			margin: 5px 2px 2px;
+		}
+
+		.am_pm {
+			margin: 0 3px;
 		}
 
 		h2 {
@@ -140,9 +151,9 @@
 			position: relative;
 			left: 0;
 			background-color: white;
-			margin: 0 5px;
+			margin: 2px 4px;
 			padding: 5px 0;
-			border-radius: 5px;
+			border-radius: 10px;
 			font-size: 1.2em;
 		}
 
@@ -151,7 +162,8 @@
 			text-align: center;
 		}
 
-		.nomPatient, .heure{
+		.nomPatient,
+		.heure {
 			font-weight: bold;
 		}
 
@@ -179,6 +191,11 @@
 
 		.buttonValid {
 			background-color: green;
+		}
+
+		/* Style pour la div avec opacité changée */
+		.opacity-change {
+			opacity: 0.6; 
 		}
 	</style>
 {% endblock %}
