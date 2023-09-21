@@ -41,7 +41,7 @@
 						{% endif %}
 						<div class="list-rdv {% if passage.etatPassage == 1 %}opacity-change{% endif %}">
 							<div class="list-infoRDV">
-								<a class="redirectionId" href="{{ path('app_meet_show', {'id': passage.id } ) }}">
+								<a class="redirectionId" href="{{ path('app_meet_show', {'id': meet.id } ) }}">
 									<div class="nomPatient">{{ meet.patient.name }}
 										{{ meet.patient.firstName }}</div>
 									<div>{{ meet.typeSoin }}</div>
@@ -79,7 +79,7 @@
 						{% endif %}
 						<div class="list-rdv {% if passage.etatPassage == 1 %}opacity-change{% endif %}">
 							<div class="list-infoRDV">
-								<a class="redirectionId" href="{{ path('app_meet_show', {'id': passage.id } ) }}">
+								<a class="redirectionId" href="{{ path('app_meet_show', {'id': meet.id } ) }}">
 									<div class="nomPatient">{{ meet.patient.name }}
 										{{ meet.patient.firstName }}</div>
 									<div>{{ meet.typeSoin }}</div>
