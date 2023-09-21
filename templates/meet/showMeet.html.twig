@@ -3,48 +3,36 @@
 {% block title %}Meet Show{% endblock %}
 
 {% block body %}
-    <ul>
+    
             
-                <p>Pour {{ meet.patient.firstname }} {{ meet.patient.name }}</p>
-                <u>SOINS</u>
-                <p class="gray-margin">{{ meet.typeSoin }}</p>
-                <u>FREQUENCE</u>
-                <ul>DEBUT DES PASSAGES :</ul>
-                <p class="gray-margin">
-                    <span class="date">{{ meet.dateDebut|date('d/m/Y') }}</span>
-                    <img src="{{ asset('../image/icone-plus.png') }}" class="right-image">
-                </p>
+    <div class="container">
+    <h2 class="white">{{ meet.patient.firstname }} {{ meet.patient.name }}</h2>
+    <h3>SOINS</h3>
+    <p class="gray-margin">{{ meet.typeSoin }}</p>
+    <h3>FREQUENCE</h3>
+    <ul>DEBUT DES PASSAGES :</ul>
+    <p class="gray-margin">
+        <span class="date">{{ meet.dateDebut|date('d/m/Y') }}</span>
+    </p>
 
-                <ul>Passage 1</ul>                    
-                <div class="checkbox-wrapper">
-                <p>{{ meet.passages[0].hour|date('H:i') }}</p>
-                <label class="custom-checkbox">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-                Début des passages
-                </label>
-                </div>
+    <div class="flex-container">
+        <ul>HEURE DE PASSAGE :</ul>
+        <div class="checkbox-wrapper">
+            <p class="time">{{ meet.passages[0].hour|date('H:i') }}</p>
+        </div>
+    </div>
 
-                <ul>Passage 2</ul>
-                   <div class="checkbox-wrapper">
-                <p>{{ meet.passages[0].hour|date('H:i') }}</p>
-                <label class="custom-checkbox">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-                Début des passages
-                </label>
-                </div>
-                
-                <u>Type passage</u>
-                <ul>{{meet.typePassage}}</ul>
+    <h3>TYPE PASSAGE</h3>
+    <p class="gray-margin">{{ meet.typePassage }}</p>
+    </div>
+
 
                 <style>
                 .gray-margin {
-                     margin: 10px; 
-                     background-color: #DCDCDC; 
-                     padding: 5px;
+                     margin: 20px; 
+                     background-color: white; 
+                     padding: 20px;
                      border-radius: 30px;
-
                 }
                 .checkbox-wrapper {
                  display: flex; 
@@ -57,9 +45,43 @@
                     width: 20px; 
                     height: auto; 
                 }
+                u,ul {
+                font-weight: bold;
+                color: white;
+                }
+
+                .flex-container {
+                display: flex;
+                align-items: center; 
+                }
+                h2{
+                    padding-top: 15px;
+                }
+                h3{
+                    color: white;
+                    outline: none;
+                    padding: 15px;
+                    padding-top: 5px;
+                }
+                
+                ul {    
+                    margin-right: 10px; 
+                }
+                .white{
+                 font-weight: 20px;
+                 color: white;
+                 text-align: center;
+                }
+                .time{
+                    font-weight: bold;
+                    color: #F3CEF6;
+                }
+                .container {
+                height: 100vh;
+                }
 
                 </style>
 
             
-    </ul>
+    
 {% endblock %}
