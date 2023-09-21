@@ -2,21 +2,15 @@
 
 {% block body %}
 	<div class="container">
-		<h1>Liste des rendez-vous</h1>
-		
+		{# Selecteur de date #}
 		<div class="selectDay">
-			<button class="left-button"><img src="../image/fleche_gauche.png" alt=""></button>
-			<input type="date" class="middle-date" value="today | date('d/m/Y')">
-			<button class="right-button"><img src="../image/fleche_droite.png" alt=""></button>
-		</div>
-
-		{# affiche la date d'aujourdui #}
-		<div class="dateToday">
-			<a href="{{ path('app_meet', {'day': dayDateTime|date_modify("-1 day")|date("d-m-Y")})}}">
-				Précédent</a>
-			<a href="{{ path('app_meet', {'day': dayDateTime|date_modify("+1 day")|date("d-m-Y")})}}">
-				Suivant</a>
+			<a class="left-button" href="{{ path('app_meet', {'day': dayDateTime|date_modify("-1 day")|date("d-m-Y")})}}">
+				<img src="../image/fleche_gauche.png" alt="">
+			</a>
 			<h2>{{ dayDateTime|date('d/m/Y') }}</h2>
+			<a class="right-button" href="{{ path('app_meet', {'day': dayDateTime|date_modify("+1 day")|date("d-m-Y")})}}">
+				<img src="../image/fleche_droite.png" alt="">
+			</a>
 		</div>
 
 		<ul class="list-rdv">
@@ -80,21 +74,18 @@
 
 	<style>
 		.container {
-			
-			/* Taille du text */
-			/* font-size: 2em; */
+			margin: 5px 2px 2px 2px;
 		}
 
 		.selectDay {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			padding: 10px;
+			padding: 2px;
 			border: 1px solid #ccc;
 			border-radius: 20px;
 			background-color: #f0f0f0;
-			/* width: 70%; */
-			margin: 0 auto;
+			margin: 0 2px;
 		}
 
 		.selectDay input {
@@ -103,16 +94,18 @@
 			margin: 0 10px;
 		}
 
-		.selectDay button {
+		.left-button,
+		.right-button {
 			padding: 10px 20px;
 			background-color: black;
 			color: #fff;
 			border: none;
 			border-radius: 20px;
 			cursor: pointer;
+			margin: 0 10px;
 		}
 
-		.selectDay button img {
+		.selectDay a img {
 			width: 20px;
 			height: 20px;
 		}
