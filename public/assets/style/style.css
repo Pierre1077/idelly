@@ -243,17 +243,23 @@ nav a i {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+#view__patient .patient__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 50px;
 }
 #view__patient .patient__item {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
   font-size: 22px;
 }
 #view__patient .patient__item p {
   color: #ffffff;
   font-weight: 600;
   white-space: nowrap;
+  margin: 0;
 }
 #view__patient .patient__item .variable__patient {
   color: #ffffff;
@@ -273,8 +279,8 @@ nav a i {
 }
 
 body {
-  background: rgb(230, 0, 126);
-  background: linear-gradient(180deg, rgb(230, 0, 126) 0%, rgb(102, 36, 131) 100%);
+  background: #e6007e;
+  background: linear-gradient(180deg, #e6007e 0%, #662483 100%);
   font-family: "Quicksand", sans-serif;
 }
 

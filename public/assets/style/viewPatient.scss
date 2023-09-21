@@ -2,17 +2,25 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+
+  .patient__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding-left: 50px;
+  }
 
   .patient__item {
     display: flex;
-    gap: 8px;
+    flex-direction: column;
     font-size: 22px;
 
     p {
       color: #ffffff;
       font-weight: 600;
       white-space: nowrap;
+      margin: 0;
     }
 
     .variable__patient {
