@@ -5,24 +5,27 @@
 {% block body %}
     
             
-                <h2 class= "white">{{ meet.patient.firstname }} {{ meet.patient.name }}</h2>
-                <h3>SOINS</h3>
-                <p class="gray-margin">{{ meet.typeSoin }}</p>
-                <h3>FREQUENCE</h3>
-                <ul>DEBUT DES PASSAGES :</ul>
-                <p class="gray-margin">
-                    <span class="date">{{ meet.dateDebut|date('d/m/Y') }}</span>
-                </p>
+    <div class="container">
+    <h2 class="white">{{ meet.patient.firstname }} {{ meet.patient.name }}</h2>
+    <h3>SOINS</h3>
+    <p class="gray-margin">{{ meet.typeSoin }}</p>
+    <h3>FREQUENCE</h3>
+    <ul>DEBUT DES PASSAGES :</ul>
+    <p class="gray-margin">
+        <span class="date">{{ meet.dateDebut|date('d/m/Y') }}</span>
+    </p>
 
-                <div class="flex-container">
-                <ul>HEURE DE PASSAGE :</ul>
-                <div class="checkbox-wrapper">
-                <p class="time">{{ meet.passages[0].hour|date('H:i') }}</p>
-                </div>
-                </div>
-                
-                <h3>TYPE PASSAGE</h3>
-                <p class="gray-margin">{{meet.typePassage}}</p>
+    <div class="flex-container">
+        <ul>HEURE DE PASSAGE :</ul>
+        <div class="checkbox-wrapper">
+            <p class="time">{{ meet.passages[0].hour|date('H:i') }}</p>
+        </div>
+    </div>
+
+    <h3>TYPE PASSAGE</h3>
+    <p class="gray-margin">{{ meet.typePassage }}</p>
+    </div>
+
 
                 <style>
                 .gray-margin {
@@ -72,6 +75,9 @@
                 .time{
                     font-weight: bold;
                     color: #F3CEF6;
+                }
+                .container {
+                height: 100vh;
                 }
 
                 </style>
