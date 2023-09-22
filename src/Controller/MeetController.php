@@ -35,6 +35,7 @@ class MeetController extends AbstractController
         $dayDateTime = DateTime::createFromFormat('d-m-Y', $day);
 
         $meets = $this->meetRepository->findBy(['user' => $this->getUser()]); // Ceci renvoi tout les rdv de la base de donnée (Il faut afficher uniquement celle don't les dates sont d'actualité) donc à modifié
+
         return $this->render('meet/index.html.twig', [
             "meets" => $meets,
             "dayDateTime" => $dayDateTime,
