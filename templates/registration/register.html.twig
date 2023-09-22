@@ -1,45 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}S'inscrire
+{% endblock %}
 
 {% block body %}
-    <div id="login">
+	<div id="login">
 
-        <div id="form__login">
-            <div class="form__wrapper">
-                <h1>Inscrivez-vous</h1>
+		<div id="form__login">
+			<div class="form__wrapper">
+				<h1>Inscrivez-vous</h1>
 
-                <div class="form__inputs">
-                    {{ form_errors(registrationForm) }}
+				<div class="form__inputs">
+					{{ form_errors(registrationForm) }}
 
-                    {{ form_start(registrationForm) }}
-                    <div>
-                        {{ form_widget(registrationForm.name, {'attr': {'placeholder': 'Nom'}}) }}
+					{{ form_start(registrationForm) }}
+					<div>
+						{{ form_widget(registrationForm.name, {'attr': {'placeholder': 'Nom'}}) }}
 
-                    </div>
-                    <div>
-                        {{ form_widget(registrationForm.firstname, {'attr': {'placeholder': 'Prénom'}}) }}
-                    </div>
-                    <div>
-                        {{ form_widget(registrationForm.email, {'attr': {'placeholder': 'Adresse e-mail'}}) }}
-                    </div>
-                    <div>
-                        {{ form_widget(registrationForm.phone, {'attr': {'placeholder': 'N° de tel.'}}) }}
-                    </div>
-                    <div>
-                        {{ form_widget(registrationForm.plainPassword, {'attr': {'placeholder': 'Mot de passe'}}) }}
-                    </div>
+					</div>
+					<div>
+						{{ form_widget(registrationForm.firstname, {'attr': {'placeholder': 'Prénom'}}) }}
+					</div>
+					<div>
+						{{ form_widget(registrationForm.email, {'attr': {'placeholder': 'Adresse e-mail'}}) }}
+					</div>
+					<div>
+						{{ form_widget(registrationForm.phone, {'attr': {'placeholder': 'N° de tel.'}}) }}
+					</div>
+					<div>
+						{{ form_widget(registrationForm.plainPassword, {'attr': {'placeholder': 'Mot de passe'}}) }}
+					</div>
 
-                    <button type="submit" class="btn">Register</button>
-                    {{ form_end(registrationForm) }}
-                </div>
-                <div class="form__navigation">
-                    <a href="{{ path('app_register') }}">S'inscrire</a>
-                    <a href="{{ path('app_login') }}">Connexion</a>
-                </div>
-            </div>
-        </div>
+					<button type="submit" class="btn" style="padding:1px">S'inscrire</button>
+					{{ form_end(registrationForm) }}
+				</div>
+				<div class="form__navigation">
+					<a href="{{ path('app_register') }}" >S'inscrire</a>
+					<a href="{{ path('app_login') }}">Connexion</a>
+				</div>
+			</div>
+		</div>
 
 
-    </div>
+	</div>
+
+	<style>
+		h1 {
+			color: white;
+		}
+		.form__inputs div {
+			justify-content: center;
+			align-items: center;
+			margin-left: 10%
+		}
+	</style>
 {% endblock %}
