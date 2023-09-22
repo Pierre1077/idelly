@@ -22,6 +22,7 @@ class NewMeetFormType extends AbstractType
         $builder
             ->add('infoComplementaire', TextareaType::class, [
                 'label'=>false,
+                'required'=>false,
                 'attr' => ['class' => 'w-100 rounded-3'],
             ])
             ->add('typeSoin', TextareaType::class, [
