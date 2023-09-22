@@ -4,7 +4,22 @@
 
 {% block body %}
            
-    <div class="container">
+    <div class="container p-3" style="min-height: 100vh; margin-bottom: 40px;">
+    <div class="row row-cols-3">
+        <div class="col col-2">
+            <img src="{{ asset('/image/logo.png') }}" style="width: 100%" alt="">
+        </div>
+        <div class="col col-7">
+            <div class="h5 m-0 mt-2 text-white text-center">
+                Patients
+            </div>
+        </div>
+        <div class="col col-3">
+            <a href="{{ path('app_meet', {'day': 'now'|date("d-m-Y")})}}" class="btn text-white border border-3 border-white w-100"><i class="fa-solid fa-rotate-left"></i></a>
+        </div>
+    </div>
+
+    <div class="my-3 w-100 bg-white" style="height: 2px;"></div>
     <h2 class="white">{{ meet.patient.firstname }} {{ meet.patient.name }}</h2>
     <h3>Soins</h3>
     <p class="gray-margin">{{ meet.typeSoin }}</p>
@@ -30,9 +45,9 @@
 
                 <style>
                 .gray-margin {
-                margin: 10px 0; /* Add margin-bottom to create space */
+                margin: 5px 0; /* Add margin-bottom to create space */
                 background-color: white;
-                padding: 15px;
+                padding: 10px;
                 border-radius: 30px;
                 }
                 .checkbox-wrapper {
@@ -77,9 +92,7 @@
                     font-weight: bold;
                     color: #F3CEF6;
                 }
-                .container {
-                height: 100vh;
-                }
+                
                 p{
                     font-size: 20px;
                 }
