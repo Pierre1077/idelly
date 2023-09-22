@@ -3,18 +3,17 @@
 {% block title %}Meet Show{% endblock %}
 
 {% block body %}
-    
-            
+           
     <div class="container">
     <h2 class="white">{{ meet.patient.firstname }} {{ meet.patient.name }}</h2>
     <h3>Soins</h3>
     <p class="gray-margin">{{ meet.typeSoin }}</p>
     <h3>Frequence</h3>
-    <ul>Début de passage :</ul>
+    <ul>Debut de passage :</ul>
     <p class="gray-margin">
         <span class="date">{{ meet.dateDebut|date('d/m/Y') }}</span>
     </p>
-    <ul>Fin de passage :</ul>
+     <ul>Fin de passage :</ul>
     <p class="gray-margin">
         <span class="date">{{ meet.dateFin|date('d/m/Y') }}</span>
     </p>
@@ -29,13 +28,12 @@
     <p class="gray-margin">{{ meet.typePassage }}</p>
     </div>
 
-
                 <style>
                 .gray-margin {
-                     margin: 20px; 
-                     background-color: white; 
-                     padding: 20px;
-                     border-radius: 30px;
+                margin: 10px 0; /* Add margin-bottom to create space */
+                background-color: white;
+                padding: 15px;
+                border-radius: 30px;
                 }
                 .checkbox-wrapper {
                  display: flex; 
@@ -81,10 +79,11 @@
                 }
                 .container {
                 height: 100vh;
-                 padding-bottom: 10px;
                 }
-
-                </style>
+                p{
+                    font-size: 20px;
+                }
+    </style>
 
             
     
