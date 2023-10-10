@@ -46,10 +46,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Meet::class)]
     private Collection $meet;
 
+    #[ORM\OneToMany(mappedBy: 'auteur', targetEntity: Messaging::class)]
+    private Collection $messagings;
+
+    #[ORM\ManyToMany(targetEntity: GroupChat::class, mappedBy: 'users')]
+    private Collection $groupChats;
+
     public function __construct()
     {
         $this->patients = new ArrayCollection();
         $this->meet = new ArrayCollection();
+        $this->messagings = new ArrayCollection();
+        $this->groupChats = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -213,6 +221,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             if ($meet->getUser() === $this) {
                 $meet->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Messaging>
+     */
+    public function getMessagings(): Collection
+    {
+        return $this->messagings;
+    }
+
+    public function addMessaging(Messaging $messaging): static
+    {
+        if (!$this->messagings->contains($messaging)) {
+            $this->messagings->add($messaging);
+            $messaging->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessaging(Messaging $messaging): static
+    {
+        if ($this->messagings->removeElement($messaging)) {
+            // set the owning side to null (unless already changed)
+            if ($messaging->getAuteur() === $this) {
+                $messaging->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GroupChat>
+     */
+    public function getGroupChats(): Collection
+    {
+        return $this->groupChats;
+    }
+
+    public function addGroupChat(GroupChat $groupChat): static
+    {
+        if (!$this->groupChats->contains($groupChat)) {
+            $this->groupChats->add($groupChat);
+            $groupChat->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroupChat(GroupChat $groupChat): static
+    {
+        if ($this->groupChats->removeElement($groupChat)) {
+            $groupChat->removeUser($this);
         }
 
         return $this;
