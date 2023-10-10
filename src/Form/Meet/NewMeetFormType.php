@@ -4,7 +4,6 @@ namespace App\Form\Meet;
 
 use App\Entity\Meet;
 use App\Entity\Patient;
-use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
