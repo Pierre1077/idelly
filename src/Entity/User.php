@@ -46,10 +46,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Meet::class)]
     private Collection $meet;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Messaging::class)]
+    private Collection $messagings;
+
     public function __construct()
     {
         $this->patients = new ArrayCollection();
         $this->meet = new ArrayCollection();
+        $this->messagings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -212,6 +216,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($meet->getUser() === $this) {
                 $meet->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Messaging>
+     */
+    public function getMessagings(): Collection
+    {
+        return $this->messagings;
+    }
+
+    public function addMessaging(Messaging $messaging): static
+    {
+        if (!$this->messagings->contains($messaging)) {
+            $this->messagings->add($messaging);
+            $messaging->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessaging(Messaging $messaging): static
+    {
+        if ($this->messagings->removeElement($messaging)) {
+            // set the owning side to null (unless already changed)
+            if ($messaging->getUser() === $this) {
+                $messaging->setUser(null);
             }
         }
 
