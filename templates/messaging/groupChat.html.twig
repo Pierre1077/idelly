@@ -15,25 +15,94 @@
 				</div>
 			</div>
 			<div class="col col-3">
-				<a href="{{ path('messaging')}}" class="btn text-white border border-3 border-white w-100"><i class="fa-solid fa-rotate-left"></i></a>
+				<a href="{{ path('messaging')}}" class="btn text-white border border-3 border-white w-100">
+					<i class="fa-solid fa-rotate-left"></i>
+				</a>
 			</div>
 		</div>
-		{% for message in messages %}
-			<div class="card">
-				<div class="card-header">
-					{{message.auteur.name}},{{message.auteur.firstname}},
-					{{message.dateContent|date('d/m/Y')}}
+		<hr class="bg-white" style="color:white">
+
+		<div class="nomContact">
+			<h2>{{userDistant.name}}
+				{{userDistant.firstname}}</h2>
+		</div>
+		{# Afficher les messages #}
+		<div class="ZoneMessage">
+			{% for message in messages %}
+				<div class="card">
+					<div class="card-header">
+						{{message.auteur.name}},{{message.auteur.firstname}},
+						{{message.dateContent|date('d/m/Y')}}
+					</div>
+					<div class="card-body">{{message.content}}</div>
 				</div>
-				<div class="card-body">{{message.content}}</div>
+			{% endfor %}
+			{# <div class="message-container">
+				<p class="message-sender">John:</p>
+				<div class="bubble">
+					<p>Ceci est un exemple de bulle de discussion. Vous pouvez ajouter du texte ici.</p>
+				</div>
 			</div>
-		{% endfor %}
+
+			<div class="message-container">
+				<p class="message-sender">Alice:</p>
+				<div class="bubble user-bubble">
+					<p>Ceci est une réponse de l'utilisateur.</p>
+				</div>
+			</div> #}
+		</div>
 
 		{# Ecrire un message #}
-		{{ form_start(form) }}
-		{{ form_row(form.content) }}
-		<button type="submit" class="btn btn-primary">Envoyer</button>
-		{{ form_end(form) }}
+		<div class="ZoneText">
+			{{ form_start(form) }}
+			{{ form_row(form.content) }}
+			<button type="submit" class="btn btn-primary">Envoyer</button>
+			{{ form_end(form) }}
+		</div>
 	</div>
 
+	<style>
+		.nomContact {
+			text-align: center;
+			color: white;
+			font-size: 2rem;
+			margin-bottom: 1rem;
+		}
+		.ZoneMessage {
+			height: 55vh;
+			overflow-y: scroll;
 
+		}
+		.ZoneText {
+			position: fixed;
+			bottom: 80px;
+			width: 100%;
+			padding-right: 2rem;
+		}
+		button {
+			float: right;
+		}
+
+		.bubble {
+			background-color: #007bff; /* Couleur de fond */
+			color: #fff; /* Couleur du texte */
+			border-radius: 10px; /* Coins arrondis */
+			padding: 10px; /* Espace intérieur */
+			max-width: 70%; /* Largeur maximale de la bulle */
+			word-wrap: break-word; /* Wrap des mots longs */
+			margin: 5px; /* Marge extérieure */
+		}
+
+		.user-bubble {
+			background-color: #2ecc71; /* Couleur de fond pour l'utilisateur */
+		}
+
+		.message-container {
+			text-align: center; /* Centrer le texte */
+		}
+
+		.message-sender {
+			font-weight: bold; /* Texte en gras pour le nom */
+		}
+	</style>
 {% endblock %}
