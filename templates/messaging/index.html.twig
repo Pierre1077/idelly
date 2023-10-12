@@ -4,35 +4,60 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container p-3" style="min-height: 100vh">
-    {# Annuaire #}
+	<div
+		class="container p-3" style="min-height: 100vh">
+		{# Annuaire #}
+		<h2 class="titre">Annuaire</h2>
 		{% for userDistant in users %}
 			{% if userDistant != user %}
 				<div class="card">
-					<div>Nom :
-						{{ userDistant.name }}, Prenom :
-						{{userDistant.firstname}}
+					<div class="card-body">
+						<h5 class="card-title">
+							<b>{{ userDistant.name }}</b>
+							{{userDistant.firstname}}</h5>
+						<a href="{{ path('redirection_group', {'id': userDistant.id}) }}" class="btn btn-primary">Ouvrir la discussion</a>
 					</div>
-					<a href="{{ path('redirection_group', {'id': userDistant.id}) }}">Groupe</a>
 				</div>
 			{% endif %}
 		{% endfor %}
-        {# Message récent #}
-		{% for groupChat in groupChats %}
+
+		{# Message récent #}
+		{# {% for groupChat in groupChats %}
 			{% if groupChat.lastUpdate != null %}
-                <div class="card">
-                    <div>Nom :
-                        {% for userDistant in groupChat.users %}
-                            {% if userDistant != user %}
-                                {{ userDistant.name }}
-                                {{ userDistant.firstname }}
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <a href="{{ path('redirection_group', {'id': groupChat.id}) }}">Voir</a>
-                </div>
-            {% endif %}
-		{% endfor %}
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">
+							{% for userDistant in groupChat.users %}
+								{% if userDistant != user %}
+									<b>{{ userDistant.name }}</b>
+									{{ userDistant.firstname }}
+								{% endif %}
+
+							{% endfor %}
+						</div>
+						<a href="{{ path('redirection_group', {'id': groupChat.id}) }}" class="btn btn-primary">
+							Voir
+						</a>
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %} #}
 	</div>
 
+	<style>
+		.card {
+			margin-bottom: 10px;
+		}
+
+		.card-body {
+			display: flex;
+			justify-content: space-between;
+		}
+		.titre {
+			text-align: center;
+			color: white;
+			font-size: 2rem;
+			margin-bottom: 1rem;
+		}
+	</style>
 {% endblock %}

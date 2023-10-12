@@ -15,25 +15,129 @@
 				</div>
 			</div>
 			<div class="col col-3">
-				<a href="{{ path('messaging')}}" class="btn text-white border border-3 border-white w-100"><i class="fa-solid fa-rotate-left"></i></a>
+				<a href="{{ path('messaging')}}" class="btn text-white border border-3 border-white w-100">
+					<i class="fa-solid fa-rotate-left"></i>
+				</a>
 			</div>
 		</div>
-		{% for message in messages %}
-			<div class="card">
-				<div class="card-header">
-					{{message.auteur.name}},{{message.auteur.firstname}},
-					{{message.dateContent|date('d/m/Y')}}
-				</div>
-				<div class="card-body">{{message.content}}</div>
-			</div>
-		{% endfor %}
+		<hr class="bg-white" style="color:white">
+
+		<div class="nomContact">
+			<h2>{{userDistant.name}}
+				{{userDistant.firstname}}</h2>
+		</div>
+		{# Afficher les messages #}
+		<div class="ZoneMessage">
+			{% for message in messages %}
+				{# Si c'est userDistant, affiche sur la gauche, sinon c'est a droite  #}
+				{% if message.auteur.id == userDistant.id %}
+					<div class="message-container userDistant">
+						<div class="messageUserDistant">
+							{{message.content}}
+						</div>
+						<div class="dateMessage" style="display: none;">
+							Le
+							{{ message.dateContent|date('d/m/Y') }}
+							à
+							{{ message.dateContent|date('H:i') }}
+						</div>
+					</div>
+				{% else %}
+					<div class="message-container userConnect">
+						<div class="messageUserConnect">
+							{{message.content}}
+						</div>
+						<div class="dateMessage" style="display: none;">
+							Le
+							{{ message.dateContent|date('d/m/Y') }}
+							à
+							{{ message.dateContent|date('H:i') }}
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
 
 		{# Ecrire un message #}
-		{{ form_start(form) }}
-		{{ form_row(form.content) }}
-		<button type="submit" class="btn btn-primary">Envoyer</button>
-		{{ form_end(form) }}
+		<div class="ZoneText">
+			{{ form_start(form) }}
+			{{ form_row(form.content) }}
+			<button type="submit" class="btn btn-primary">Envoyer</button>
+			{{ form_end(form) }}
+		</div>
 	</div>
 
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".message-container").click(function () {
+			var dateMessage = $(this).find(".dateMessage");
 
+			// Vérifiez si la date est visible
+			if (dateMessage.is(":visible")) {
+				dateMessage.hide(); // Masquer la date si elle est visible
+			} else {
+				dateMessage.show(); // Afficher la date si elle est masquée
+			}
+			});
+		});
+	</script>
+
+	<style>
+		.nomContact {
+			text-align: center;
+			color: white;
+			font-size: 2rem;
+			margin-bottom: 1rem;
+		}
+		.ZoneMessage {
+			height: 55vh;
+			overflow-y: scroll;
+			display: flex;
+			flex-direction: column;
+		}
+		.ZoneText {
+			position: fixed;
+			bottom: 80px;
+			width: 100%;
+			padding-right: 2rem;
+		}
+		button {
+			float: right;
+		}
+
+		.message-container {
+			max-width: 70%;
+		}
+
+		.userConnect {
+			align-self: flex-end;
+		}
+
+		.userDistant {
+			align-self: flex-start;
+		}
+
+		.messageUserDistant,
+		.messageUserConnect {
+			color: #fff;
+			border-radius: 10px;
+			padding: 10px;
+			margin: 5px;
+			width: fit-content;
+		}
+
+		.messageUserDistant {
+			background-color: #3498db;
+		}
+
+		.messageUserConnect {
+			background-color: blue; /* Couleur de fond pour l'utilisateur */
+		}
+
+		.dateMessage {
+			font-size: 0.8rem;
+			color: white;
+		}
+	</style>
 {% endblock %}

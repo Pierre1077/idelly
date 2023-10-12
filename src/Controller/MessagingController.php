@@ -35,10 +35,17 @@ class MessagingController extends AbstractController
         $groupChats = $user->getGroupChats();
         $users = $this->userRepository->findAll();
 
+        //Le dernier message envoyé dans le groupe
+        // $lastMessages = [];
+        // foreach ($groupChats as $groupChat) {
+        //     $lastMessages[$groupChat->getId()] = $groupChat->getMessages()->last();
+        // }
+
         return $this->render('messaging/index.html.twig', [
             'user' => $user,
             'groupChats' => $groupChats,
             'users' => $users,
+            // 'lastMessages' => $lastMessages,
         ]);
     }
 
