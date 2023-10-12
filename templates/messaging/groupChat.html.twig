@@ -29,27 +29,23 @@
 		{# Afficher les messages #}
 		<div class="ZoneMessage">
 			{% for message in messages %}
-				<div class="card">
-					<div class="card-header">
-						{{message.auteur.name}},{{message.auteur.firstname}},
-						{{message.dateContent|date('d/m/Y')}}
+				{# Si c'est userDistant, affiche sur la gauche, sinon c'est a droite  #}
+				{% if message.auteur.id == userDistant.id %}
+					<div class="message-container userDistant">
+						<div class="messageUserDistant">
+							{{message.content}}
+						</div>
+						{# <div class="dateMessage">Le {{message.dateContent|date('d/m/Y')}} à {{message.dateContent|date('H:i')}}</div> #}
 					</div>
-					<div class="card-body">{{message.content}}</div>
-				</div>
+				{% else %}
+					<div class="message-container userConnect">
+						<div class="messageUserConnect">
+							{{message.content}}
+						</div>
+						{# <div class="dateMessage">Le {{message.dateContent|date('d/m/Y')}} à {{message.dateContent|date('H:i')}}</div> #}
+					</div>
+				{% endif %}
 			{% endfor %}
-			{# <div class="message-container">
-				<p class="message-sender">John:</p>
-				<div class="bubble">
-					<p>Ceci est un exemple de bulle de discussion. Vous pouvez ajouter du texte ici.</p>
-				</div>
-			</div>
-
-			<div class="message-container">
-				<p class="message-sender">Alice:</p>
-				<div class="bubble user-bubble">
-					<p>Ceci est une réponse de l'utilisateur.</p>
-				</div>
-			</div> #}
 		</div>
 
 		{# Ecrire un message #}
@@ -71,7 +67,8 @@
 		.ZoneMessage {
 			height: 55vh;
 			overflow-y: scroll;
-
+			display: flex;
+			flex-direction: column;
 		}
 		.ZoneText {
 			position: fixed;
@@ -83,26 +80,38 @@
 			float: right;
 		}
 
-		.bubble {
-			background-color: #007bff; /* Couleur de fond */
-			color: #fff; /* Couleur du texte */
-			border-radius: 10px; /* Coins arrondis */
-			padding: 10px; /* Espace intérieur */
-			max-width: 70%; /* Largeur maximale de la bulle */
-			word-wrap: break-word; /* Wrap des mots longs */
-			margin: 5px; /* Marge extérieure */
-		}
-
-		.user-bubble {
-			background-color: #2ecc71; /* Couleur de fond pour l'utilisateur */
-		}
-
 		.message-container {
-			text-align: center; /* Centrer le texte */
+			width: fit-content;
+			max-width: 70%;
 		}
 
-		.message-sender {
-			font-weight: bold; /* Texte en gras pour le nom */
+		.userConnect {
+			 align-self: flex-end;
+		}
+
+		.userDistant {
+			align-self: flex-start;
+		}
+
+		.messageUserDistant,
+		.messageUserConnect {
+			color: #fff;
+			border-radius: 10px;
+			padding: 10px;
+			margin: 5px;
+		}
+
+		.messageUserDistant {
+			background-color: #3498db;
+		}
+
+		.messageUserConnect {
+			background-color: blue; /* Couleur de fond pour l'utilisateur */
+		}
+
+		.dateMessage {
+			font-size: 0.8rem;
+			color: white;
 		}
 	</style>
 {% endblock %}
